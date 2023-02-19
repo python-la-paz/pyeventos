@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+{% image page.hero_image format-webp-lossless as tmp_hero %}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/bootstrap.min.css' %}">
+<!-- Icon -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/fonts/line-icons.css' %}">
+<!-- Nivo Lightbox -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/nivo-lightbox.css' %}">
+<!-- Animate -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/animate.css' %}">
+<!-- Main Style -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/main.css' %}">
+<!-- Responsive Style -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/responsive.css' %}">
+<style>
+    .hero-area-bg-image {
+        background: url("{{ tmp_hero.url }}") no-repeat;
+        background-size: cover;
+    }
+</style>
+{% endblock extra_css %}
+{% block content %}
+
+<!-- Header Area wrapper Starts -->
+<header id="header-wrap">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            {% image page.logo_image format-webp-lossless as tmp_logo %}
+
+            <a href="index.html" class="navbar-brand"><img height="64" src="{{ tmp_logo.url }}"
+                    alt="{{ tmp_logo.alt }}"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="lni-menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#header-wrap">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">
+                            About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedules">
+                            schedules
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">
+                            Speakers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">
+                            Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">
+                            pricing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sponsors">
+                            Sponsors
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#google-map-area">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Area Start -->
+    <div id="hero-area" class="hero-area-bg hero-area-bg-image">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 col-sm-12">
+                    <div class="contents text-center">
+                        <div class="icon">
+                            <i class="lni-mic"></i>
+                        </div>
+                        <p class="banner-info">{{ page.literal_date }} - {{page.location}}</p>
+                        <h2 class="head-title">{{ page.event }}</h2>
+                        <p class="banner-desc">{{ page.about|richtext }}</p>
+                        <br>
+                        <div class="banner-btn">
+                            <a href="{{page.url_get_tickets}}" class="btn btn-common">Get Ticket</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+
+    <!-- Count Bar Start -->
+    <section id="count">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="count-wrapper text-center">
+                        <div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">
+                            <div id="clock" class="time-count"></div>
+                            <input type="hidden" id="clock_date" value="{{ page.event_date|date:'Y/m/d' }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Count Bar End -->
+</header>
+
+<div id="preloader">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
+{% block extra_js %}
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static '2023/js/jquery-min.js' %}"></script>
+<script src="{% static '2023/js/popper.min.js' %}"></script>
+<script src="{% static '2023/js/bootstrap.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.countdown.min.js' %}"></script>
+<script src="{% static '2023/js/waypoints.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.nav.js' %}"></script>
+<script src="{% static '2023/js/jquery.easing.min.js' %}"></script>
+<script src="{% static '2023/js/wow.js' %}"></script>
+<script src="{% static '2023/js/nivo-lightbox.js' %}"></script>
+<script src="{% static '2023/js/video.js' %}"></script>
+<script src="{% static '2023/js/main.js' %}"></script>
+{% endblock %}
