@@ -1,0 +1,60 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% image segment.value.image format-webp-lossless as tmp_logo_segment %}
+
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row">
+            {% if segment.value.position == "left" %}
+
+            <div class="col-lg-6 col-md-12 col-xs-12">
+                <div class="img-thumb">
+                    <img class="img-fluid" src="{{ tmp_logo_segment.url }}" alt="{{ tmp_logo_segment.alt }}">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-xs-12">
+                <div class="about-content">
+                    <div>
+                        <div class="about-text">
+                            <h2>{{segment.value.name}}</h2>
+                            <p>{{segment.value.description|richtext}}</p>
+                        </div>
+                        <ul class="stylish-list mb-3">
+                            {% for options in segment.value.list_options %}
+                            <li><i class="lni lni-checkmark-circle"></i>{{options}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% if segment.value.url is not None and segment.value.url != "" %}
+                        <a class="btn btn-common" href="{{segment.value.url}}">{{segment.value.url_text}}</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-lg-6 col-md-12 col-xs-12">
+                <div class="about-content">
+                    <div>
+                        <div class="about-text">
+                            <h2>{{segment.value.name}}</h2>
+                            <p>{{segment.value.description|richtext}}</p>
+                        </div>
+                        <ul class="stylish-list mb-3">
+                            {% for options in segment.value.list_options %}
+                            <li><i class="lni lni-checkmark-circle"></i>{{options}}</li>
+                            {% endfor %}
+                        </ul>
+                        {% if segment.value.url is not None and segment.value.url != "" %}
+                        <a class="btn btn-common" href="{{segment.value.url}}">{{segment.value.url_text}}</a> 
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-xs-12">
+                <div class="img-thumb">
+                    <img class="img-fluid" src="{{ tmp_logo_segment.url }}" alt="{{ tmp_logo_segment.alt }}">
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

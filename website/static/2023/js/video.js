@@ -15,9 +15,9 @@
 	  vid.classList.toggle("stopfade");
 	  if (vid.paused) {
 	    vid.play();
-	    pauseButton.innerHTML = "<i class='lni-pause'></i>";
+	    pauseButton.innerHTML = "<i class='lni lni-pause'></i>";
 	  } else {
 	    vid.pause();
-	    pauseButton.innerHTML = "<i class='lni-play'></i>";
+	    pauseButton.innerHTML = "<i class='lni lni-play'></i>";
 	  }
 	})
