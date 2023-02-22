@@ -95,16 +95,26 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9 col-sm-12">
                     <div class="contents text-center">
+                        {% if page.logo_image_big is not None %}
+                        {% image page.logo_image_big format-webp-lossless as tmp_logo_big %}
+                        <img src="{{ tmp_logo_big.url }}" alt="{{ tmp_logo_big.alt }}">
+                        <br>
+                        <br>
+                        {% else %}
                         <div class="icon">
                             <i class="lni lni-mic"></i>
                         </div>
+                        {% endif %}
+
                         <p class="banner-info">{{ page.literal_date }} - {{page.location}}</p>
                         <h2 class="head-title">{{ page.event }}</h2>
                         <p class="banner-desc">{{ page.about|richtext }}</p>
                         <br>
+                        {% if page.url_get_tickets is not None and page.url_get_tickets != "" %}
                         <div class="banner-btn">
-                            <a href="{{page.url_get_tickets}}" class="btn btn-common">{{page.text_get_tickets}}</a> 
+                            <a href="{{page.url_get_tickets}}" class="btn btn-common">{{page.text_get_tickets}}</a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -148,9 +158,50 @@
     {% include 'segments/information_bar.html' %}
 </div>
 {% endif %}
+{% if segment.block_type == 'sponsor_segment' %}
+<div>
+    {% include 'segments/sponsor.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'maps_segment' %}
+<div>
+    {% include 'segments/maps.html' %}
+</div>
+{% endif %}
 {% endfor %}
 {% endfor %}
 
+
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <div class="subscribe-inner wow fadeInDown" data-wow-delay="0.3s">
+                    <h2 class="subscribe-title">{{page.footer_title}}</h2>
+                </div>
+                <div class="footer-logo">
+                    <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}" width="64">
+                </div>
+                <div class="social-icons-footer">
+                    <ul>
+                        {% for social in page.footer_networks %}
+                        <li class="{{social.value.classname}}"><a target="_blank" href="{{social.value.url}}"><i
+                                    class="{{social.value.lni_icon}}"></i></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="site-info">
+                    <p>{{page.footer_site_info|richtext}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Go to Top Link -->
+<a href="#" class="back-to-top">
+    <i class="lni lni-chevron-up"></i>
+</a>
 
 <div id="preloader">
     <div class="sk-circle">

@@ -1,18 +1,21 @@
+{% load mathfilters %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 <!-- Information Bar Start -->
-<section id="information-bar">
+<section id="{{segment.value.id_tag}}">
     <div class="container">
-        <div class="row inforation-wrapper">
+        <div class="row {{segment.value.class_name}}">
             {% for information in segment.value.list_information %}
-            <div class="col-lg-3 col-md-6 col-xs-12">
-                <ul>
-                    <li>
-                        <i class="{{information.lni_icon}}"></i>
-                    </li>
-                    <li><span><b>{{information.title}}</b> {{information.description}}</span></li>
-                </ul>
-            </div>
+            {% with numerator=12 denominator=segment.value.list_information|length %}
+                <div class="col-lg-{{ numerator|intdiv:denominator}} col-md-6 col-xs-12">
+                    <ul>
+                        <li>
+                            <i class="{{information.lni_icon}}"></i>
+                        </li>
+                        <li><span><b>{{information.title}}</b> {{information.description}}</span></li>
+                    </ul>
+                </div>
+        {% endwith %}
             {% endfor %}
         </div>
     </div>

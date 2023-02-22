@@ -12,10 +12,19 @@ class HomePage(Page):
     location = models.CharField(max_length=250, blank=True)
     literal_date = models.CharField(max_length=250, blank=True)
     url_get_tickets = models.URLField(blank=True)
-    text_get_tickets = models.CharField(max_length=250, blank=True, default="Get tickets")
+    text_get_tickets = models.CharField(
+        max_length=250, blank=True, default="Get tickets"
+    )
     event_date = models.DateField(blank=True, null=True)
 
     logo_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    logo_image_big = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,
@@ -29,6 +38,33 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    footer_title = models.CharField(max_length=250, blank=True)
+    footer_site_info = RichTextField(blank=True)
+    footer_networks = StreamField(
+        [
+            (
+                "networks",
+                blocks.StructBlock(
+                    [
+                        ("classname", blocks.CharBlock(max_length=250, required=True)),
+                        (
+                            "lni_icon",
+                            blocks.CharBlock(
+                                help_text="(lni lni-help) https://lineicons.com/icons/",
+                                required=True,
+                            ),
+                        ),
+                        (
+                            "url",
+                            blocks.URLBlock(required=True),
+                        ),
+                    ]
+                ),
+            ),
+        ],
+        blank=True,
+        use_json_field=False,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("event"),
@@ -39,34 +75,63 @@ class HomePage(Page):
         FieldPanel("text_get_tickets"),
         FieldPanel("event_date"),
         FieldPanel("logo_image"),
+        FieldPanel("logo_image_big"),
         FieldPanel("hero_image"),
+        FieldPanel("footer_title"),
+        FieldPanel("footer_site_info"),
+        FieldPanel("footer_networks"),
     ]
+
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
         segments = SegmentPage.objects.child_of(self).live().order_by("order")
-        context["segments"] = segments #sorted (segments, key=lambda x: x.order)
+        context["segments"] = segments  # sorted (segments, key=lambda x: x.order)
         return context
 
+
 class InformationBlock(blocks.StructBlock):
-            lni_icon = blocks.CharBlock(help_text = "(lni lni-help) https://lineicons.com/icons/")
-            title = blocks.CharBlock()
-            description = blocks.CharBlock()
+    lni_icon = blocks.CharBlock(help_text="(lni lni-help) https://lineicons.com/icons/")
+    title = blocks.CharBlock()
+    description = blocks.CharBlock()
+
+
+class SponsorBlock(blocks.StructBlock):
+    name = blocks.CharBlock()
+    image = ImageChooserBlock(required=False)
+    level = blocks.ChoiceBlock(
+        choices=[
+            ("silver", "Plata"),
+            ("gold", "Oro"),
+            ("diamond", "Diamante"),
+        ],
+        default="silver",
+    )
+    url = blocks.URLBlock(blank=True)
+
 
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
     segments = StreamField(
         [
-        # detail segment
+            # detail segment
             (
                 "detail_segment",
                 blocks.StructBlock(
                     [
                         ("name", blocks.CharBlock(max_length=250, blank=False)),
                         ("description", blocks.RichTextBlock(required=False)),
-                        ("list_options", blocks.ListBlock(blocks.CharBlock(required=False))),
+                        (
+                            "list_options",
+                            blocks.ListBlock(blocks.CharBlock(required=False)),
+                        ),
                         ("url", blocks.URLBlock(required=False)),
-                        ("url_text", blocks.CharBlock(max_length=250, required=False, default="More info")),
+                        (
+                            "url_text",
+                            blocks.CharBlock(
+                                max_length=250, required=False, default="More info"
+                            ),
+                        ),
                         ("image", ImageChooserBlock(required=False)),
                         (
                             "position",
@@ -81,23 +146,69 @@ class SegmentPage(Page):
                     ]
                 ),
             ),
-
             # video segment
             (
                 "video_segment",
                 blocks.StructBlock(
                     [
-                        ("url", blocks.URLBlock(blank=True), ),
+                        (
+                            "url",
+                            blocks.URLBlock(blank=True),
+                        ),
                     ]
                 ),
             ),
-
             (
                 "information_segment",
                 blocks.StructBlock(
                     [
-                        ("list_information", blocks.ListBlock(InformationBlock) )
-                        
+                        (
+                            "id_tag",
+                            blocks.CharBlock(
+                                max_length=250, required=False, default="contact-text"
+                            ),
+                        ),
+                        (
+                            "class_name",
+                            blocks.CharBlock(
+                                max_length=250,
+                                required=False,
+                                default="contact-wrapper",
+                            ),
+                        ),
+                        (
+                            "list_information",
+                            blocks.ListBlock(InformationBlock, max_num=4),
+                        ),
+                    ]
+                ),
+            ),
+            (
+                "sponsor_segment",
+                blocks.StructBlock(
+                    [
+                        (
+                            "name",
+                            blocks.CharBlock(
+                                max_length=250, required=True, default="Sponsors"
+                            ),
+                        ),
+                        ("description", blocks.RichTextBlock(required=False)),
+                        ("sponsors", blocks.ListBlock(SponsorBlock)),
+                    ]
+                ),
+            ),
+            (
+                "maps_segment",
+                blocks.StructBlock(
+                    [
+                        (
+                            "url",
+                            blocks.URLBlock(
+                                blank=True,
+                                help_text="https://www.google.com/maps/embed?pb=.....",
+                            ),
+                        ),
                     ]
                 ),
             ),
