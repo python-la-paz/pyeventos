@@ -65,6 +65,9 @@ class HomePage(Page):
         blank=True,
         use_json_field=False,
     )
+    color_gradient_1 = models.CharField(max_length=250, blank=True, default="#FF4D79")
+    color_gradient_2 = models.CharField(max_length=250, blank=True, default="#FF809F")
+    color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
 
     content_panels = Page.content_panels + [
         FieldPanel("event"),
@@ -80,6 +83,9 @@ class HomePage(Page):
         FieldPanel("footer_title"),
         FieldPanel("footer_site_info"),
         FieldPanel("footer_networks"),
+        FieldPanel("color_gradient_1"),
+        FieldPanel("color_gradient_2"),
+        FieldPanel("color_primary"),
     ]
 
     def get_context(self, request):

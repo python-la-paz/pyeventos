@@ -7,6 +7,13 @@
 
 {% block extra_css %}
 {% image page.hero_image format-webp-lossless as tmp_hero %}
+<style>
+    :root {
+        --cg1: {{page.color_gradient_1}};
+        --cg2: {{page.color_gradient_2}};
+        --primary: {{page.color_primary}};
+    }
+</style>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" type="text/css" href="{% static '2023/css/bootstrap.min.css' %}">
 <!-- Icon -->
