@@ -514,11 +514,11 @@ a.back-to-top:hover, a.back-to-top:focus {
   padding-right: 0;
 }
 
-#page-banner-area {
+/* #page-banner-area {
   background: url(../img/background/banner.jpg) no-repeat;
   background-position: 50% 50%;
   background-size: cover;
-}
+} 
 
 .page-banner {
   position: relative;
@@ -547,7 +547,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 .page-banner .page-banner-title h2 {
   color: #fff;
   font-size: 40px;
-}
+}*/
 
 @-webkit-keyframes fadeIn {
   from {
@@ -839,7 +839,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   }
 }
 
-#about {
+.about {
   background: #F6F9F9;
 }
 
@@ -897,10 +897,10 @@ a.back-to-top:hover, a.back-to-top:focus {
   margin-right: 10px;
 }
 
+/*TODO  Change Event UP ID for class */
 #event-up .event-item {
   position: relative;
 }
-
 #event-up .event-item .overlay-text {
   text-align: center;
   position: absolute;
@@ -1122,33 +1122,32 @@ h1 {
 }
 
 /* Sponsors Area */
-#sponsors {
-  background: url(../img/background/countdown.jpg) no-repeat center;
-  background-attachment: scroll;
-  background-size: auto auto;
-  background-size: cover;
-  background-attachment: fixed;
-  position: relative;
+.sponsors {
+  background-attachment: scroll !important;
+  background-size: auto auto !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  position: relative !important;
 }
 
-#sponsors .section-title-header .section-title {
+.sponsors .section-title-header .section-title {
   color: #fff;
 }
 
-#sponsors .section-title-header p {
+.sponsors .section-title-header p {
   color: #fff;
 }
 
-#sponsors .sponsors-logo a img {
+.sponsors .sponsors-logo a img {
   margin: 30px;
 }
 
-#sponsors .spnsors-logo:hover {
+.sponsors .spnsors-logo:hover {
   border-color: transparent;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Schedule Area */
+/*TODO Schedule Area */
 #schedules {
   background: #f3f4f3;
 }
@@ -1360,12 +1359,12 @@ h1 {
 }
 
 /* Inforamation Bar */
-#information-bar {
+.information-bar {
   background: #fff;
   position: relative;
 }
 
-#information-bar .inforation-wrapper {
+.information-bar .inforation-wrapper {
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 8px 24px #E2E8ED;
@@ -1377,15 +1376,15 @@ h1 {
   z-index: 999;
 }
 
-#information-bar ul {
+.information-bar ul {
   text-align: center;
 }
 
-#information-bar ul li {
+.information-bar ul li {
   display: inline-block;
 }
 
-#information-bar ul li i {
+.information-bar ul li i {
   text-align: center;
   padding: 0 12px;
   font-size: 32px;
@@ -1396,14 +1395,14 @@ h1 {
   background-clip: text;
 }
 
-#information-bar ul li span {
+.information-bar ul li span {
   font-size: 13px;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
 }
 
-#information-bar ul li span b {
+.information-bar ul li span b {
   font-size: 20px;
   color: #374045;
   font-weight: bold;
@@ -1484,7 +1483,7 @@ h1 {
   text-fill-color: transparent;
 }
 
-/* Gallery Section */
+/*TODO Gallery Section */
 #gallery {
   background: #f3f4f3;
   position: relative;
@@ -1816,10 +1815,10 @@ h1 {
   background: #111111;
 }
 
-#conatiner-map {
+/* #conatiner-map {
   width: 100%;
   height: 580px;
-}
+} */
 
 .title-forme {
   font-size: 28px;
@@ -1858,11 +1857,11 @@ h1 {
 }
 
 /* Contact Forme */
-#google-map-area {
+.google-map-area {
   position: relative;
 }
 
-#google-map-area .container-fluid {
+.google-map-area .container-fluid {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1949,11 +1948,11 @@ h1 {
 }
 
 /* Inforamation Bar */
-#contact-text {
+.contact-text {
   background: #161E26;
 }
 
-#contact-text .contact-wrapper {
+.contact-text .contact-wrapper {
   background: #fff;
   margin-bottom: -35px;
   margin-top: -20px;
@@ -1964,15 +1963,15 @@ h1 {
   z-index: 999;
 }
 
-#contact-text ul {
+.contact-text ul {
   text-align: center;
 }
 
-#contact-text ul li {
+.contact-text ul li {
   display: inline-block;
 }
 
-#contact-text ul li i {
+.contact-text ul li i {
   text-align: center;
   padding: 0 12px;
   font-size: 28px;
@@ -1980,14 +1979,14 @@ h1 {
   color: var(--primary);
 }
 
-#contact-text ul li span {
+.contact-text ul li span {
   font-size: 14px;
   display: inline-block;
   text-align: left;
   vertical-align: middle;
 }
 
-#contact-text ul li span b {
+.contact-text ul li span b {
   font-size: 20px;
   color: #374045;
   font-weight: bold;
@@ -2224,7 +2223,7 @@ footer {
   border-left: none;
 }
 
-/* Pricing Ticket */
+/*TODO Pricing Ticket */
 #pricing {
   background: #f8fafa;
   position: relative;

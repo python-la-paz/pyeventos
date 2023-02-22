@@ -2,7 +2,7 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 <!-- Information Bar Start -->
-<section id="{{segment.value.id_tag}}">
+<section id="{{block.slug}}" class="information-bar {{segment.value.id_tag}}">
     <div class="container">
         <div class="row {{segment.value.class_name}}">
             {% for information in segment.value.list_information %}

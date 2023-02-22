@@ -1,17 +1,15 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 <!-- Video Section Start -->
-<div class="ready-to-play">
-    <video id="bgvid" class="stop" loop>
-      <source src="{{segment.value.url}}" type="video/mp4">
-    </video>
-    <div id="polina" class="video-text">
-      <div class="tb-t">
-          <div class="tb-c">
-            <div class="polina"><button><i class='lni lni-play'></i></button></div>
-          </div>
+<div id="{{block.slug}}" class="ready-to-play">
+  <video id="bgvid-{{block.slug}}" class="stop" loop>
+    <source src="{{segment.value.url}}" type="video/mp4">
+  </video>
+  <div id="polina-{{block.slug}}" class="video-text">
+    <div class="tb-t">
+      <div class="tb-c">
+        <div class="polina"><button onclick="pauseButton('{{block.slug}}')"><i class='lni lni-play'></i></button></div>
       </div>
     </div>
   </div>
-  {# TODO Mas de 1 Video #}
-  <!-- Video Section End -->
+</div>

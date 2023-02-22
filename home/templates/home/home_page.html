@@ -33,8 +33,9 @@
     }
 </style>
 {% endblock extra_css %}
-{% block content %}
 
+
+{% block content %}
 <!-- Header Area wrapper Starts -->
 <header id="header-wrap">
     <!-- Navbar Start -->
@@ -56,7 +57,14 @@
                             Home
                         </a>
                     </li>
+                    {% for menu_page in page.get_children.live.in_menu %}
                     <li class="nav-item">
+                        <a class="nav-link" href="#{{ menu_page.slug }}">
+                            {{ menu_page.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#about">
                             About
                         </a>
@@ -90,7 +98,7 @@
                         <a class="nav-link" href="#google-map-area">
                             Contact
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -233,7 +241,7 @@
 
 {% block extra_js %}
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{% static '2023/js/jquery-min.js' %}"></script>
+<script type="" src="{% static '2023/js/jquery-min.js' %}"></script>
 <script src="{% static '2023/js/popper.min.js' %}"></script>
 <script src="{% static '2023/js/bootstrap.min.js' %}"></script>
 <script src="{% static '2023/js/jquery.countdown.min.js' %}"></script>

@@ -200,6 +200,7 @@ class SegmentPage(Page):
                             ),
                         ),
                         ("description", blocks.RichTextBlock(required=False)),
+                        ("background", ImageChooserBlock(required=False)),
                         ("sponsors", blocks.ListBlock(SponsorBlock)),
                     ]
                 ),

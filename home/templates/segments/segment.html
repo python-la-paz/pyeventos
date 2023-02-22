@@ -2,7 +2,7 @@
 {% load wagtailimages_tags %}
 {% image segment.value.image format-webp-lossless as tmp_logo_segment %}
 
-<section id="about" class="section-padding">
+<section id="{{block.slug}}" class="about section-padding">
     <div class="container">
         <div class="row">
             {% if segment.value.position == "left" %}

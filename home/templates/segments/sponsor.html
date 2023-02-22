@@ -1,7 +1,8 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 <!-- Sponsors Section Start -->
-<section id="sponsors" class="section-padding">
+{% image segment.value.background format-webp-lossless as tmp_sponsor_bg %}
+<section id="{{block.slug}}" class="section-padding sponsors" style="background: url({{tmp_sponsor_bg.url}}) no-repeat center;">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
