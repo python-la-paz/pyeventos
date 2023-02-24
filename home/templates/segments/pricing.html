@@ -1,0 +1,44 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<!-- Ticket Pricing Area Start -->
+<section id="{{block.slug}}" class="section-padding pricing">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title-header text-center">
+                    <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">{{segment.value.name}}</h2>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">{{segment.value.description|richtext}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for tier in segment.value.tiers %}
+            {% image tier.image format-webp-lossless as tmp_tier %}
+            <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
+                <div class="price-block-wrapper wow fadeInLeft {{tier.classname}}" data-wow-delay="0.2s">
+                    <div class="colmun-title">
+                        <h5>{{tier.name}}</h5>
+                    </div>
+                    <img src="{{tmp_tier.url}}" alt="{{tmp_tier.alt}}" width="50">
+                    <div class="price">
+                        <h2>{{tier.pricing}}</h2>
+                        <span>{{tier.detail_pricing}}</span>
+                    </div>
+                    <div class="pricing-list">
+                        <ul>
+                            {% for benefit in tier.benefits %}
+                            <li><i class="lni lni-checkmark-circle"></i><span class="text">{{benefit}}</span></li>
+                            {% endfor %}
+                            {% for no_benefit in tier.no_benefits %}
+                            <li><i class="lni lni-close"></i><span class="text">{{no_benefit}}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a href="{{tier.url}}" class="btn btn-common">{{tier.url_text}}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Ticket Pricing Area End -->

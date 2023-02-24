@@ -113,7 +113,18 @@ class SponsorBlock(blocks.StructBlock):
         ],
         default="silver",
     )
-    url = blocks.URLBlock(blank=True)
+    url = blocks.URLBlock(required=False)
+
+class TiersBlock(blocks.StructBlock):
+    classname = blocks.CharBlock(required=False)
+    name = blocks.CharBlock()
+    pricing = blocks.CharBlock()
+    detail_pricing = blocks.CharBlock()
+    image = ImageChooserBlock(required=False)
+    benefits = blocks.ListBlock(blocks.CharBlock(required=False))
+    no_benefits = blocks.ListBlock(blocks.CharBlock(required=False))
+    url = blocks.URLBlock(required=False)
+    url_text = blocks.CharBlock(required=False, default="Buy now")
 
 
 class SegmentPage(Page):
@@ -216,6 +227,21 @@ class SegmentPage(Page):
                                 help_text="https://www.google.com/maps/embed?pb=.....",
                             ),
                         ),
+                    ]
+                ),
+            ),
+            (
+                "pricing_segment",
+                blocks.StructBlock(
+                    [
+                        (
+                            "name",
+                            blocks.CharBlock(
+                                max_length=250, required=True, default="Pricing"
+                            ),
+                        ),
+                        ("description", blocks.RichTextBlock(required=False)),
+                        ("tiers", blocks.ListBlock(TiersBlock)),
                     ]
                 ),
             ),

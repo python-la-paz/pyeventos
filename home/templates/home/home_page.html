@@ -183,6 +183,11 @@
     {% include 'segments/maps.html' %}
 </div>
 {% endif %}
+{% if segment.block_type == 'pricing_segment' %}
+<div>
+    {% include 'segments/pricing.html' %}
+</div>
+{% endif %}
 {% endfor %}
 {% endfor %}
 

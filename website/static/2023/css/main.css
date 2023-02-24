@@ -224,7 +224,7 @@ ul li, ol li {
 
 .btn-common:hover {
   color: #fff;
-  background-image: linear-gradient(65deg, #ff527d 0, #ff85a3 100%);
+  background-image: linear-gradient(65deg, var(--cg2) 0, var(--cg1) 100%);
   box-shadow: 0 8px 16px rgba(255, 77, 121, 0.4);
   transition: all .2s ease-in-out;
   -moz-transition: all .2s ease-in-out;
@@ -2224,12 +2224,12 @@ footer {
 }
 
 /*TODO Pricing Ticket */
-#pricing {
+.pricing {
   background: #f8fafa;
   position: relative;
 }
 
-#pricing .price-block-wrapper {
+.pricing .price-block-wrapper {
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -2242,16 +2242,16 @@ footer {
   transition: all 300ms ease-in-out;
 }
 
-#pricing .price-block-wrapper .icon {
+.pricing .price-block-wrapper .icon {
   padding: 20px;
 }
 
-#pricing .price-block-wrapper .icon i {
+.pricing .price-block-wrapper .icon i {
   font-size: 60px;
   color: var(--primary);
 }
 
-#pricing .price-block-wrapper .colmun-title h5 {
+.pricing .price-block-wrapper .colmun-title h5 {
   font-size: 20px;
   color: #212121;
   margin-bottom: 20px;
@@ -2259,14 +2259,14 @@ footer {
   font-weight: 700;
 }
 
-#pricing .price-block-wrapper .price {
+.pricing .price-block-wrapper .price {
   padding-top: 10px;
   transition: all 500ms ease;
   -webkit-transition: all 500ms ease;
   -moz-transition: all 500ms ease;
 }
 
-#pricing .price-block-wrapper .price h2 {
+.pricing .price-block-wrapper .price h2 {
   font-size: 38px;
   background-image: linear-gradient(65deg, var(--cg1) 0, var(--cg2) 100%);
   -webkit-background-clip: text;
@@ -2276,12 +2276,12 @@ footer {
   margin-bottom: 7px;
 }
 
-#pricing .price-block-wrapper .price span {
+.pricing .price-block-wrapper .price span {
   text-transform: uppercase;
   font-size: 13px;
 }
 
-#pricing .price-block-wrapper .price p {
+.pricing .price-block-wrapper .price p {
   font-size: 15px;
   color: #5c5c5c;
   font-weight: 700;
@@ -2293,15 +2293,15 @@ footer {
   -moz-transition: all 500ms ease;
 }
 
-#pricing .price-block-wrapper .pricing-list {
+.pricing .price-block-wrapper .pricing-list {
   padding: 15px 0;
 }
 
-#pricing .price-block-wrapper .pricing-list ul {
+.pricing .price-block-wrapper .pricing-list ul {
   padding-bottom: 15px;
 }
 
-#pricing .price-block-wrapper .pricing-list ul li {
+.pricing .price-block-wrapper .pricing-list ul li {
   position: relative;
   line-height: 40px;
   font-size: 15px;
@@ -2309,58 +2309,58 @@ footer {
   padding: 2px 0px;
 }
 
-#pricing .price-block-wrapper .pricing-list ul li i {
+.pricing .price-block-wrapper .pricing-list ul li i {
   margin-right: 7px;
   font-size: 12px;
   color: var(--primary);
 }
 
-#pricing .price-block-wrapper .btn i {
+.pricing .price-block-wrapper .btn i {
   font-size: 12px;
   margin-right: 5px;
 }
 
-#pricing .price-block-wrapper:hover {
+.pricing .price-block-wrapper:hover {
   box-shadow: 0 16px 48px #E2E8ED;
 }
 
-#pricing .active {
+.pricing .active {
   background-image: linear-gradient(65deg, var(--cg1) 0, var(--cg2) 100%);
   box-shadow: 0 16px 48px #E2E8ED;
 }
 
-#pricing .active .icon i {
+.pricing .active .icon i {
   color: #fff;
 }
 
-#pricing .active .colmun-title h5 {
+.pricing .active .colmun-title h5 {
   color: #fff;
 }
 
-#pricing .active .price h2 {
+.pricing .active .price h2 {
   background-image: linear-gradient(120deg, #fff 0%, #fff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-#pricing .active .price span {
+.pricing .active .price span {
   color: #fff;
 }
 
-#pricing .active .price p {
+.pricing .active .price p {
   color: #fff;
 }
 
-#pricing .active .pricing-list ul li {
+.pricing .active .pricing-list ul li {
   color: #fff;
 }
 
-#pricing .active .pricing-list ul li i {
+.pricing .active .pricing-list ul li i {
   color: #fff;
 }
 
-#pricing .active .btn {
+.pricing .active .btn {
   background: #fff;
   color: #212121;
 }
