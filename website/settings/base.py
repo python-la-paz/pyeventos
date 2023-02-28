@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-APP_DB_TYPE = os.getenv("APP_DB_TYPE", "mysql")
+APP_DB_TYPE = os.getenv("APP_DB_TYPE", "mysqls")
 APP_HOST_DB = os.getenv("APP_HOST_DB", "localhost")
 APP_PORT_DB = os.getenv("APP_PORT_DB", "6033")
 APP_NAME_DB = os.getenv("APP_NAME_DB", "app_db_2")

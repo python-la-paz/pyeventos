@@ -2175,6 +2175,23 @@ footer {
   text-align: center;
 }
 
+.time-entry-comming {
+  display: inline-block;
+  margin: 15px 0;
+}
+
+.time-entry-comming span {
+  font-size: 60px;
+  line-height: 45px;
+  font-weight: 700;
+  letter-spacing: 0.3;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+
 .time-entry {
   display: inline-block;
   margin: 15px 0;

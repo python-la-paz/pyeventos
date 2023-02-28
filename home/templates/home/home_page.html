@@ -44,7 +44,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             {% image page.logo_image format-webp-lossless as tmp_logo %}
 
-            <a href="index.html" class="navbar-brand"><img height="64" src="{{ tmp_logo.url }}"
+            <a href="/" class="navbar-brand"><img height="64" src="{{ tmp_logo.url }}"
                     alt="{{ tmp_logo.alt }}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,6 +147,8 @@
                     <div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">
                         <div id="clock" class="time-count"></div>
                         <input type="hidden" id="clock_date" value="{{ page.event_date|date:'Y/m/d' }}">
+                        <input type="hidden" id="clock_date_show" value="{{ page.show_time }}">
+                        <input type="hidden" id="clock_date_show_message" value="{{ page.message_show_time }}">
                     </div>
                 </div>
             </div>

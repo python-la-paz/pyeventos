@@ -68,6 +68,8 @@ class HomePage(Page):
     color_gradient_1 = models.CharField(max_length=250, blank=True, default="#FF4D79")
     color_gradient_2 = models.CharField(max_length=250, blank=True, default="#FF809F")
     color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
+    show_time = models.BooleanField(default=True)
+    message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
 
     content_panels = Page.content_panels + [
         FieldPanel("event"),
@@ -86,6 +88,8 @@ class HomePage(Page):
         FieldPanel("color_gradient_1"),
         FieldPanel("color_gradient_2"),
         FieldPanel("color_primary"),
+        FieldPanel("show_time"),
+        FieldPanel("message_show_time"),
     ]
 
     def get_context(self, request):
