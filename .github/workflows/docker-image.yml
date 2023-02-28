@@ -1,5 +1,5 @@
 
-name: Docker Image CI And Deploy In Portainer
+name: Docker Image CI
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        context: ./website
+        context: .
         platforms: linux/amd64,linux/arm64
         push: true
         tags: ${{secrets.DOCKER_IMAGE}}:${{env.IMAGE_TAG}},${{secrets.DOCKER_IMAGE}}:latest        
