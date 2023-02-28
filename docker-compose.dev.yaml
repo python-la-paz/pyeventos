@@ -1,0 +1,38 @@
+version: '3.9' 
+volumes:
+  app_media: {}
+  db_data: {}
+services:
+  web:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/backend.conf:/etc/nginx/conf.d/default.conf
+      - app_media:/app/media
+    depends_on:
+      - app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - "8000"
+    volumes:
+      - app_media:/app/media
+    env_file:
+      - backend/.env
+    depends_on:
+      - database
+  database:
+    image: mysql:5.7
+    restart: always
+    env_file:
+      - database/.env
+    expose:
+      - "3306"
+    volumes:
+      - db_data:/var/lib/mysql

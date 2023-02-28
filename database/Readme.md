@@ -1,0 +1,1 @@
+Use this folder to copy database.env  only with name .env

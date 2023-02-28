@@ -1,0 +1,1 @@
+Use this folder to copy backend.env only with name .env

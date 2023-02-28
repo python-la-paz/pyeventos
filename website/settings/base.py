@@ -20,6 +20,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
+APP_DB_TYPE = os.getenv("APP_DB_TYPE", "mysql")
+APP_HOST_DB = os.getenv("APP_HOST_DB", "localhost")
+APP_PORT_DB = os.getenv("APP_PORT_DB", "6033")
+APP_NAME_DB = os.getenv("APP_NAME_DB", "app_db_2")
+APP_USER_DB = os.getenv("APP_USER_DB", "db_user")
+APP_PASSWORD_DB = os.getenv("APP_PASSWORD_DB", "db_user_pass")
 
 # Application definition
 
@@ -57,6 +63,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "website.urls"
@@ -85,12 +92,25 @@ WSGI_APPLICATION = "website.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if APP_DB_TYPE == "mysql":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "HOST": APP_HOST_DB,
+            "PORT": APP_PORT_DB,
+            "NAME": APP_NAME_DB,
+            "USER": APP_USER_DB,
+            "PASSWORD": APP_PASSWORD_DB,
+        },
     }
-}
+
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
 
 
 # Password validation

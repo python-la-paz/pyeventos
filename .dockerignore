@@ -37,3 +37,12 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+backend/
+database/
+nginx/
+docker-compose.*.yaml
+.github/
+backend.env
+database.env
+traefik.env
