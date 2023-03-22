@@ -568,6 +568,7 @@ a.back-to-top:focus {
 
 .navbar-brand img {
   width: 75%;
+  max-height: 128px;
 }
 
 .top-nav-collapse {
@@ -1132,13 +1133,23 @@ h1 {
   color: #fff;
 }
 
-.sponsors .sponsors-logo a img {
-  margin: 30px;
+.sponsors .sponsors-logo a {
+  padding-right: 10px;
 }
 
-.sponsors .spnsors-logo:hover {
-  border-color: transparent;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+.sponsors .sponsors-logo a figure {
+  margin: 10px;
+  display: inline-block;
+  max-width: 250px;
+}
+
+.sponsors .sponsors-logo a figure img {
+  max-height: 128px;
+}
+
+.sponsors .sponsors-logo a figure figcaption {
+  margin-top: 10px;
+  color: white;
 }
 
 /*TODO Schedule Area */
@@ -2149,6 +2160,9 @@ footer {
 .footer-logo {
   margin-bottom: 50px;
 }
+.footer-logo img{
+  max-height: 128px;
+}
 
 /* ==========================================================================
    Countdown Style Start
@@ -2181,7 +2195,7 @@ footer {
 }
 
 .time-entry-comming span {
-  font-size: 60px;
+  font-size: xx-large;
   line-height: 45px;
   font-weight: 700;
   letter-spacing: 0.3;
@@ -2189,6 +2203,7 @@ footer {
   display: block;
   color: #fff;
   margin-bottom: 10px;
+  padding: 1px;
 }
 
 

@@ -2,7 +2,8 @@
 {% load wagtailimages_tags %}
 <!-- Sponsors Section Start -->
 {% image segment.value.background format-webp-lossless as tmp_sponsor_bg %}
-<section id="{{block.slug}}" class="section-padding sponsors" style="background: url({{tmp_sponsor_bg.url}}) no-repeat center;">
+<section id="{{block.slug}}" class="section-padding sponsors"
+    style="background: url({{tmp_sponsor_bg.url}}) no-repeat center;">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -18,7 +19,12 @@
                 <div class="sponsors-logo text-center">
                     {% for sponsor in segment.value.sponsors %}
                     {% image sponsor.image format-webp-lossless as tmp_sponsor %}
-                    <a href="{{sponsor.url}}"><img src="{{tmp_sponsor.url}}" alt="{{tmp_sponsor.alt}}" width="128"></a>
+                    <a href="{{sponsor.url}}">
+                        <figure>
+                            <img src="{{tmp_sponsor.url}}" alt="{{tmp_sponsor.alt}}" class="{{sponsor.level}}">
+                            <figcaption>{{sponsor.name}}</figcaption>
+                        </figure>
+                    </a>
                     {% endfor %}
                 </div><!-- sponsors logo end-->
             </div>
