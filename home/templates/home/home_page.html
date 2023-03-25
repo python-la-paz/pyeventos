@@ -64,41 +64,13 @@
                         </a>
                     </li>
                     {% endfor %}
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#about">
-                            About
+                    {% for menu_external in page.menu_links %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ menu_external.value.url }}" target="_blank">
+                            {{ menu_external.value.text }}
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#schedules">
-                            schedules
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#team">
-                            Speakers
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#gallery">
-                            Gallery
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#pricing">
-                            pricing
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#sponsors">
-                            Sponsors
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#google-map-area">
-                            Contact
-                        </a>
-                    </li> -->
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -127,7 +99,7 @@
                         <br>
                         {% if page.url_get_tickets is not None and page.url_get_tickets != "" %}
                         <div class="banner-btn">
-                            <a href="{{page.url_get_tickets}}" class="btn btn-common">{{page.text_get_tickets}}</a>
+                            <a href="{{page.url_get_tickets}}" class="btn btn-common" target="_blank">{{page.text_get_tickets}}</a>
                         </div>
                         {% endif %}
                     </div>
@@ -188,6 +160,11 @@
 {% if segment.block_type == 'pricing_segment' %}
 <div>
     {% include 'segments/pricing.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'schedule_segment' %}
+<div>
+    {% include 'segments/schedule.html' %}
 </div>
 {% endif %}
 {% endfor %}

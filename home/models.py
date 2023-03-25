@@ -70,7 +70,21 @@ class HomePage(Page):
     color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
     show_time = models.BooleanField(default=True)
     message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
-
+    menu_links = StreamField(
+            [
+                (
+                    "menu_links",
+                    blocks.StructBlock(
+                        [
+                            ("text", blocks.CharBlock(max_length=250, required=True)),
+                            ("url",blocks.CharBlock(max_length=250, required=True, default="#")),
+                        ]
+                    ),
+                ),
+            ],
+            blank=True,
+            use_json_field=False,
+        )
     content_panels = Page.content_panels + [
         FieldPanel("event"),
         FieldPanel("about"),
@@ -90,8 +104,9 @@ class HomePage(Page):
         FieldPanel("color_primary"),
         FieldPanel("show_time"),
         FieldPanel("message_show_time"),
+        FieldPanel("menu_links"),
     ]
-
+    
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
@@ -130,6 +145,20 @@ class TiersBlock(blocks.StructBlock):
     url = blocks.URLBlock(required=False)
     url_text = blocks.CharBlock(required=False, default="Buy now")
 
+class ScheduleDetailBlock(blocks.StructBlock):
+    menu_title = blocks.CharBlock()
+    menu_subtitle = blocks.CharBlock(default="Workshop")
+
+    title = blocks.CharBlock()
+    speaker = blocks.CharBlock()
+    resume = blocks.RichTextBlock()
+    location = blocks.CharBlock(required=False)
+    image = ImageChooserBlock(required=False)
+
+class ScheduleBlock(blocks.StructBlock):
+    name = blocks.CharBlock()
+    detail = blocks.CharBlock()
+    schedule_details = blocks.ListBlock(ScheduleDetailBlock(required=False))
 
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
@@ -246,6 +275,21 @@ class SegmentPage(Page):
                         ),
                         ("description", blocks.RichTextBlock(required=False)),
                         ("tiers", blocks.ListBlock(TiersBlock)),
+                    ]
+                ),
+            ),
+            (
+                "schedule_segment",
+                blocks.StructBlock(
+                    [
+                        (
+                            "name",
+                            blocks.CharBlock(
+                                max_length=250, required=True, default="Schedule"
+                            ),
+                        ),
+                        ("description", blocks.RichTextBlock(required=False)),
+                        ("schedules", blocks.ListBlock(ScheduleBlock)),
                     ]
                 ),
             ),

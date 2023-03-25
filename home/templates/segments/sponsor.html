@@ -19,7 +19,7 @@
                 <div class="sponsors-logo text-center">
                     {% for sponsor in segment.value.sponsors %}
                     {% image sponsor.image format-webp-lossless as tmp_sponsor %}
-                    <a href="{{sponsor.url}}">
+                    <a href="{{sponsor.url}}" target="_blank">
                         <figure>
                             <img src="{{tmp_sponsor.url}}" alt="{{tmp_sponsor.alt}}" class="{{sponsor.level}}">
                             <figcaption>{{sponsor.name}}</figcaption>

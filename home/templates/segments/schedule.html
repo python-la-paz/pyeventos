@@ -1,0 +1,88 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+<!-- Schedule Section Start -->
+<section id="{{block.slug}}" class="schedule section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title-header text-center">
+                    <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">{{segment.value.name}}</h2>
+                    <p class="wow fadeInDown" data-wow-delay="0.2s">{{segment.value.description|richtext}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mb-5 text-center">
+                <ul class="nav nav-tabs" id="schedule-{{block.slug}}" role="tablist">
+                {% for schedules in segment.value.schedules %}
+                <li class="nav-item">
+                    <a class="nav-link {% if forloop.counter == 1 %}active{% endif %}"
+                        id="{{block.slug}}-tab-{{forloop.counter}}-tab" data-toggle="tab"
+                        href="#{{block.slug}}-tab-{{forloop.counter}}" role="tab"
+                        aria-controls="{{block.slug}}-tab-{{forloop.counter}}" aria-expanded="true">
+                        <div class="item-text">
+                            <h4>{{schedules.name}}</h4>
+                            <h5>{{schedules.detail}}</h5>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+                </ul>
+            </div>
+            <div class="col-12">
+                <div class="schedule-area row wow fadeInDown" data-wow-delay="0.3s">
+                    <div class="schedule-tab-content col-12 clearfix">
+                        <div class="tab-content" id="schedule-{{block.slug}}Content">
+                            {% for schedules in segment.value.schedules %}
+
+
+                            <div class="tab-pane fade {% if forloop.counter == 1 %}show active{% endif %}"
+                                id="{{block.slug}}-tab-{{forloop.counter}}" role="tabpanel"
+                                aria-labelledby="{{block.slug}}-tab-{{forloop.counter}}-tab">
+                                <div id="accordion-{{block.slug}}-{{forloop.counter}}">
+                                    {% for details in schedules.schedule_details %}
+                                    <div class="card">
+                                        <div
+                                            id="heading-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                                            <div class="schedule-slot-time">
+                                                <span>{{details.menu_title}}</span>
+                                                {{details.menu_subtitle}}
+                                            </div>
+                                            <div class="collapsed card-header" data-toggle="collapse"
+                                                data-target="#collapse-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}"
+                                                aria-expanded="false"
+                                                aria-controls="collapse-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                                                <div class="images-box">
+                                                    {% image details.image fill-200x200 format-webp-lossless as tmp_schedule %}
+                                                    <img class="img-fluid" src="{{tmp_schedule.url}}" alt="{{tmp_schedule.alt}}">
+                                                </div>
+                                                <h4>{{details.title}}</h4>
+                                                <h5 class="name">{{details.speaker}}</h5>
+                                            </div>
+                                        </div>
+                                        <div id="collapse-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}"
+                                            class="collapse {% if forloop.counter == 1 %}show{% endif %}"
+                                            aria-labelledby="heading-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}"
+                                            data-parent="#accordion-{{block.slug}}-{{forloop.parentloop.counter}}">
+                                            <div class="card-body">
+                                                <p>{{details.resume | richtext}}</p>
+                                                {% if details.location is not None and details.location != "" %}
+                                                <div class="location">
+                                                    <span>Ubicación:</span>{{details.location}}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Schedule Section End -->
