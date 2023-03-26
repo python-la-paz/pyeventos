@@ -52,6 +52,9 @@
                                                 data-target="#collapse-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}"
                                                 aria-expanded="false"
                                                 aria-controls="collapse-{{block.slug}}-{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                                                <div class="schedule-slot-time-min">
+                                                    <span>{{details.menu_title}}</span>&nbsp;{{details.menu_subtitle}}
+                                                </div>
                                                 <div class="images-box">
                                                     {% image details.image fill-200x200 format-webp-lossless as tmp_schedule %}
                                                     <img class="img-fluid" src="{{tmp_schedule.url}}" alt="{{tmp_schedule.alt}}">

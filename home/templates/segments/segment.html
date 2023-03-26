@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% image segment.value.image format-webp-lossless as tmp_logo_segment %}
-
+{% if segment.value.position != "full" %}
 <section id="{{block.slug}}" class="about section-padding">
     <div class="container">
         <div class="row">
@@ -25,7 +25,8 @@
                             {% endfor %}
                         </ul>
                         {% if segment.value.url is not None and segment.value.url != "" %}
-                        <a class="btn btn-common" href="{{segment.value.url}}" target="_blank">{{segment.value.url_text}}</a>
+                        <a class="btn btn-common" href="{{segment.value.url}}"
+                            target="_blank">{{segment.value.url_text}}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -44,7 +45,8 @@
                             {% endfor %}
                         </ul>
                         {% if segment.value.url is not None and segment.value.url != "" %}
-                        <a class="btn btn-common" href="{{segment.value.url}}" target="_blank">{{segment.value.url_text}}</a> 
+                        <a class="btn btn-common" href="{{segment.value.url}}"
+                            target="_blank">{{segment.value.url_text}}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -58,3 +60,38 @@
         </div>
     </div>
 </section>
+{% else %}
+<section id="{{block.slug}}">
+    <div class="hero-area hero-area-bg" style='background: url("{{ tmp_logo_segment.url }}") no-repeat; background-size: cover; 
+    background-position-y: top;
+    background-position-x: center;'>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 col-sm-12">
+                    <div class="contents text-center">
+
+                        <h2 class="head-title">{{segment.value.name}}</h2>
+                        <p class="banner-desc">{{segment.value.description|richtext}}</p>
+                        <br>
+                        <div class="about-content text-justify">
+                            <ul class="stylish-list mb-3">
+                                {% for options in segment.value.list_options %}
+                                <li><i class="lni lni-checkmark-circle"></i>{{options}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <br>
+                        {% if segment.value.url is not None and segment.value.url != "" %}
+                        <div class="banner-btn">
+                            <a href="{{segment.value.url}}" class="btn btn-common"
+                                target="_blank">{{segment.value.url_text}}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

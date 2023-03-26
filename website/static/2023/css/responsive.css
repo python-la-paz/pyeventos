@@ -1,6 +1,6 @@
 /* only small desktops */
 @media (min-width: 992px) and (max-width: 1199px) {
-  #hero-area .contents .head-title {
+  .hero-area .contents .head-title {
     font-size: 40px;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
@@ -15,7 +15,10 @@
   .schedule .card .schedule-slot-time {
     padding: 38px 22px;
   }
-  #pricing .price-block-wrapper .pricing-list {
+  .schedule .card .schedule-slot-time-min {
+    display: none;
+  }
+  .pricing .price-block-wrapper .pricing-list {
     padding: 10px 35px 10px 45px;
   }
   .blog-item .descr h3 a {
@@ -48,20 +51,23 @@
     font-size: 13px;
     line-height: 18px;
   }
-  #pricing .price-block-wrapper .pricing-list {
+  .pricing .price-block-wrapper .pricing-list {
     padding: 10px 35px 10px 45px;
   }
-  #sponsors .spnsors-logo img {
+  .sponsors .spnsors-logo img {
     width: 80%;
+  }
+  .schedule .card .schedule-slot-time-min {
+    display: none;
   }
 }
 
 /* only small tablets */
 @media (min-width: 768px) and (max-width: 991px) {
-  #hero-area .contents .head-title {
+  .hero-area .contents .head-title {
     font-size: 36px;
   }
-  #information-bar ul {
+  .information-bar ul {
     text-align: left;
     margin: 10px;
   }
@@ -83,6 +89,9 @@
     padding: 29px;
     max-width: 22%;
   }
+  .schedule .card .schedule-slot-time-min {
+    display: none;
+  }
   .schedule .schedule-tab-title .nav-tabs .nav-link {
     width: 150px;
   }
@@ -92,7 +101,7 @@
   .counter-section .counter {
     margin-bottom: 30px;
   }
-  #pricing .price-block-wrapper .pricing-list {
+  .pricing .price-block-wrapper .pricing-list {
     padding: 10px 35px 10px 60px;
   }
   .about-item {
@@ -101,10 +110,10 @@
   .accordion .header-title {
     font-size: 12px;
   }
-  #pricing .price-block-wrapper .pricing-list {
+  .pricing .price-block-wrapper .pricing-list {
     padding: 10px 60px 10px 45px;
   }
-  #sponsors .spnsors-logo {
+  .sponsors .spnsors-logo {
     padding: 30px;
   }
   #event-up .event-item {
@@ -123,26 +132,26 @@
   .section-sub {
     font-size: 16px;
   }
-  #hero-area .contents {
+  .hero-area .contents {
     padding: 100px 0;
   }
-  #hero-area .contents .head-title {
+  .hero-area .contents .head-title {
     font-size: 20px;
     margin-bottom: 10px;
   }
-  #hero-area .contents .btn-date {
+  .hero-area .contents .btn-date {
     font-size: 12px;
   }
-  #hero-area .contents .btn {
+  .hero-area .contents .btn {
     margin: 25px 3px 0 0;
   }
-  #hero-area .contents .banner-info {
+  .hero-area .contents .banner-info {
     font-size: 14px;
   }
-  #hero-area .contents .banner-desc {
+  .hero-area .contents .banner-desc {
     padding: 0 10px;
   }
-  #information-bar ul {
+  .information-bar ul {
     text-align: left;
     margin-bottom: 30px;
   }
@@ -181,6 +190,26 @@
   .schedule .card .schedule-slot-time {
     display: none;
   }
+  .schedule .card .schedule-slot-time-min {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(65deg, var(--cg1) 0, var(--cg2) 100%);
+    color: #fff;
+    margin: -30px -30px 5px -30px;
+    padding: 5px 5px;
+  }
+  .schedule .card .schedule-slot-time-min::before {
+    content: '';
+    position: absolute;
+    left: 1%;
+    top: 30px;
+    border-width: 12px;
+    border-style: solid;
+    border-color: var(--cg1) transparent transparent transparent;
+  }
+  
   .schedule .card-header {
     padding: 30px;
   }
@@ -190,10 +219,10 @@
   #event-up .event-item {
     margin-bottom: 30px;
   }
-  #pricing .price-block-wrapper .pricing-list {
+  .pricing .price-block-wrapper .pricing-list {
     padding: 10px 30px 10px 40px;
   }
-  #sponsors .spnsors-logo {
+  .sponsors .spnsors-logo {
     margin-bottom: 15px;
   }
   .blog-item .descr h3 a {
@@ -205,10 +234,10 @@
   .contact-item {
     margin-bottom: 40px;
   }
-  #sponsors .spnsors-logo img {
+  .sponsors .spnsors-logo img {
     width: 80%;
   }
-  #contact-text ul {
+  .contact-text ul {
     text-align: left;
     margin-bottom: 15px;
   }
@@ -229,5 +258,10 @@
   .btn {
     padding: 5px 7px;
     font-size: 13px;
+  }
+}
+@media  (min-width: 1200px) {
+  .schedule .card .schedule-slot-time-min {
+    display: none;
   }
 }

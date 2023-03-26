@@ -189,6 +189,7 @@ class SegmentPage(Page):
                                 choices=[
                                     ("left", "Izquierda"),
                                     ("right", "Derecha"),
+                                    ("full", "Completa"),
                                 ],
                                 default="left",
                             ),

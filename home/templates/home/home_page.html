@@ -30,6 +30,8 @@
     .hero-area-bg-image {
         background: url("{{ tmp_hero.url }}") no-repeat;
         background-size: cover;
+        background-position-y: top;
+        background-position-x: center;
     }
 </style>
 {% endblock extra_css %}
@@ -44,8 +46,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             {% image page.logo_image format-webp-lossless as tmp_logo %}
 
-            <a href="/" class="navbar-brand"><img src="{{ tmp_logo.url }}"
-                    alt="{{ tmp_logo.alt }}"></a>
+            <a href="/" class="navbar-brand"><img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="lni lni-menu"></i>
@@ -76,7 +77,7 @@
         </div>
     </nav>
     <!-- Hero Area Start -->
-    <div id="hero-area" class="hero-area-bg hero-area-bg-image">
+    <div class="hero-area hero-area-bg hero-area-bg-image">
         <div class="overlay"></div>
         <div class="container">
             <div class="row justify-content-center">
@@ -99,7 +100,8 @@
                         <br>
                         {% if page.url_get_tickets is not None and page.url_get_tickets != "" %}
                         <div class="banner-btn">
-                            <a href="{{page.url_get_tickets}}" class="btn btn-common" target="_blank">{{page.text_get_tickets}}</a>
+                            <a href="{{page.url_get_tickets}}" class="btn btn-common"
+                                target="_blank">{{page.text_get_tickets}}</a>
                         </div>
                         {% endif %}
                     </div>
