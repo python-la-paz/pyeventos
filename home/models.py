@@ -173,7 +173,7 @@ class SegmentPage(Page):
                         ("description", blocks.RichTextBlock(required=False)),
                         (
                             "list_options",
-                            blocks.ListBlock(blocks.CharBlock(required=False)),
+                            blocks.ListBlock(blocks.RichTextBlock(required=False)),
                         ),
                         ("url", blocks.URLBlock(required=False)),
                         (
@@ -190,9 +190,13 @@ class SegmentPage(Page):
                                     ("left", "Izquierda"),
                                     ("right", "Derecha"),
                                     ("full", "Completa"),
+                                    ("empty", "Sin Imagen"),
                                 ],
                                 default="left",
                             ),
+                        ),
+                        (
+                            "list_style",blocks.BooleanBlock(required=False, default=False),
                         ),
                     ]
                 ),

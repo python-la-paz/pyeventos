@@ -2461,3 +2461,24 @@ footer {
   padding: 12px 40px;
   text-transform: uppercase;
 }
+
+.show-list-style{
+  margin-left: auto;
+  padding: revert;
+  list-style: circle !important;
+}
+.show-list-style > ul, ol {
+  margin-left: auto;
+  padding-left: 15px;
+  list-style: disc !important;
+}
+.show-list-style > ul > li{
+  margin-left: auto;
+  padding: revert;
+  list-style: disc !important;
+}
+.show-list-style > ol > li{
+  margin-left: auto;
+  padding: revert;
+  list-style: decimal !important;
+}

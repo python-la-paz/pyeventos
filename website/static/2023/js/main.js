@@ -97,5 +97,6 @@
     });
 
   });
+  $('#preloader').fadeOut();
 
 }(jQuery));
