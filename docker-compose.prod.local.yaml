@@ -15,7 +15,7 @@ services:
     depends_on:
       - app
   app:
-    image: pythonlapaz/pyday:latest
+    image: gcr.io/jevillanueva/pythonlapaz/pyday:latest
     restart: always
     expose:
       - "8000"
