@@ -6,12 +6,13 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block extra_css %}
-{% image page.hero_image format-webp-lossless as tmp_hero %}
+{% image page.hero_image fill-1900x740-c20 format-webp preserve-svg as tmp_hero %}
 <style>
     :root {
         --cg1: {{page.color_gradient_1}};
         --cg2: {{page.color_gradient_2}};
         --primary: {{page.color_primary}};
+        --text-hero: {{page.color_text_hero}};
     }
 </style>
 <!-- Bootstrap CSS -->
@@ -33,6 +34,14 @@
         background-position-y: top;
         background-position-x: center;
     }
+    .hero-area .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, {{page.hero_image_overlay_opacity}});
+    }
 </style>
 {% endblock extra_css %}
 
@@ -44,9 +53,11 @@
     <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            {% image page.logo_image format-webp-lossless as tmp_logo %}
+            {% image page.logo_image max-180x90 format-webp preserve-svg as tmp_logo  %}
 
-            <a href="/" class="navbar-brand"><img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}"></a>
+            <a href="/" class="navbar-brand"><img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}"
+                
+            ></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="lni lni-menu"></i>
@@ -82,21 +93,18 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-9 col-sm-12">
-                    <div class="contents text-center">
+                    <div class="contents text-center" style="text-align: {{page.position_event}}! important;">
                         {% if page.logo_image_big is not None %}
-                        {% image page.logo_image_big format-webp-lossless as tmp_logo_big %}
+                        {% image page.logo_image_big  max-300x150 format-webp preserve-svg as tmp_logo_big %}
                         <img src="{{ tmp_logo_big.url }}" alt="{{ tmp_logo_big.alt }}">
                         <br>
                         <br>
-                        {% else %}
-                        <div class="icon">
-                            <i class="lni lni-mic"></i>
-                        </div>
+                        
                         {% endif %}
 
-                        <p class="banner-info">{{ page.literal_date }} - {{page.location}}</p>
-                        <h2 class="head-title">{{ page.event }}</h2>
-                        <p class="banner-desc">{{ page.about|richtext }}</p>
+                        <p class="banner-info">{{ page.literal_date }} {{page.location}}</p>
+                        <div class="head-title">{{ page.event|richtext }}</div>
+                        <div class="banner-desc" style="text-align: justify;">{{ page.about|richtext }}</div>
                         <br>
                         {% if page.url_get_tickets is not None and page.url_get_tickets != "" %}
                         <div class="banner-btn">
@@ -187,7 +195,7 @@
                     <ul>
                         {% for social in page.footer_networks %}
                         <li class="{{social.value.classname}}"><a target="_blank" href="{{social.value.url}}"><i
-                                    class="{{social.value.lni_icon}}"></i></a></li>
+                                    class="{{social.value.lni_icon}}" title="{{social.value.lni_icon}}"></i></a></li>
                         {% endfor %}
                     </ul>
                 </div>

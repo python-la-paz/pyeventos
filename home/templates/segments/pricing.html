@@ -13,11 +13,11 @@
         </div>
         <div class="row">
             {% for tier in segment.value.tiers %}
-            {% image tier.image format-webp-lossless as tmp_tier %}
+            {% image tier.image  max-100x100 format-webp preserve-svg as tmp_tier %}
             <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
                 <div class="price-block-wrapper wow fadeInLeft {{tier.classname}}" data-wow-delay="0.2s">
                     <div class="colmun-title">
-                        <h5>{{tier.name}}</h5>
+                        <h3>{{tier.name}}</h3>
                     </div>
                     <img src="{{tmp_tier.url}}" alt="{{tmp_tier.alt}}" width="50">
                     <div class="price">

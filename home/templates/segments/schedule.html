@@ -21,8 +21,8 @@
                         href="#{{block.slug}}-tab-{{forloop.counter}}" role="tab"
                         aria-controls="{{block.slug}}-tab-{{forloop.counter}}" aria-expanded="true">
                         <div class="item-text">
-                            <h4>{{schedules.name}}</h4>
-                            <h5>{{schedules.detail}}</h5>
+                            <h3>{{schedules.name}}</h3>
+                            <h4>{{schedules.detail}}</h4>
                         </div>
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                                                     <span>{{details.menu_title}}</span>&nbsp;{{details.menu_subtitle}}
                                                 </div>
                                                 <div class="images-box">
-                                                    {% image details.image fill-200x200 format-webp-lossless as tmp_schedule %}
+                                                    {% image details.image fill-200x200  format-webp preserve-svg as tmp_schedule %}
                                                     <img class="img-fluid" src="{{tmp_schedule.url}}" alt="{{tmp_schedule.alt}}">
                                                 </div>
                                                 <h4>{{details.title}}</h4>

@@ -7,7 +7,16 @@ from wagtail.images.blocks import ImageChooserBlock
 
 
 class HomePage(Page):
-    event = models.CharField(max_length=250, blank=True)
+    event = RichTextField(blank=True)
+    position_event = models.CharField(
+        max_length=250,
+        choices=[
+            ("center", "center"),
+            ("left", "left"),
+            ("right", "right"),
+        ],
+        default="center",
+    )
     about = RichTextField(blank=True)
     location = models.CharField(max_length=250, blank=True)
     literal_date = models.CharField(max_length=250, blank=True)
@@ -38,6 +47,7 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    hero_image_overlay_opacity = models.DecimalField(default=0.70, decimal_places=2, max_digits=3)
     footer_title = models.CharField(max_length=250, blank=True)
     footer_site_info = RichTextField(blank=True)
     footer_networks = StreamField(
@@ -63,11 +73,12 @@ class HomePage(Page):
             ),
         ],
         blank=True,
-        use_json_field=False,
+        use_json_field=True,
     )
     color_gradient_1 = models.CharField(max_length=250, blank=True, default="#FF4D79")
     color_gradient_2 = models.CharField(max_length=250, blank=True, default="#FF809F")
     color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
+    color_text_hero  = models.CharField(max_length=250, blank=True, default="#FFFFFF")
     show_time = models.BooleanField(default=True)
     message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
     menu_links = StreamField(
@@ -83,10 +94,11 @@ class HomePage(Page):
                 ),
             ],
             blank=True,
-            use_json_field=False,
+            use_json_field=True,
         )
     content_panels = Page.content_panels + [
         FieldPanel("event"),
+        FieldPanel("position_event"),
         FieldPanel("about"),
         FieldPanel("location"),
         FieldPanel("literal_date"),
@@ -96,6 +108,8 @@ class HomePage(Page):
         FieldPanel("logo_image"),
         FieldPanel("logo_image_big"),
         FieldPanel("hero_image"),
+        FieldPanel("hero_image_overlay_opacity"),
+        FieldPanel("color_text_hero"),
         FieldPanel("footer_title"),
         FieldPanel("footer_site_info"),
         FieldPanel("footer_networks"),
@@ -300,7 +314,7 @@ class SegmentPage(Page):
             ),
         ],
         blank=True,
-        use_json_field=False,
+        use_json_field=True,
         max_num=1,
     )
 
