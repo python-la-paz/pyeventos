@@ -2413,7 +2413,7 @@ footer {
 }
 
 .hero-area .contents {
-  padding: 160px 20px 180px;
+  padding: 160px var(--hero-padding-right) 180px var(--hero-padding-left); 
 }
 
 .hero-area .contents .icon {
@@ -2454,6 +2454,73 @@ footer {
 }
 
 .hero-area .contents .btn {
+  margin: 0px 10px 0px;
+  font-size: 16px;
+  padding: 12px 40px;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+3. Hero Area Sections
+========================================================================== */
+
+.hero-area-section {
+  color: var(--text-hero);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-area-section .overlay-static {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.hero-area-section .contents {
+  padding: 160px 20px 180px; 
+}
+
+.hero-area-section .contents .icon {
+  margin-bottom: 30px;
+}
+
+.hero-area-section .contents .icon i {
+  background-image: linear-gradient(65deg, var(--cg1) 0, var(--cg2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 50px;
+}
+
+.hero-area-section .contents .banner-info {
+  font-size: 18px;
+  font-style: italic;
+  margin-bottom: 22px;
+  line-height: 24px;
+  color: var(--text-hero);
+}
+
+.hero-area-section .contents .head-title {
+  color: var(--text-hero);
+  font-size: 48px;
+  line-height: 48px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.hero-area-section .contents .banner-desc {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-hero);
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+
+.hero-area-section .contents .btn {
   margin: 0px 10px 0px;
   font-size: 16px;
   padding: 12px 40px;

@@ -48,6 +48,8 @@ class HomePage(Page):
         related_name="+",
     )
     hero_image_overlay_opacity = models.DecimalField(default=0.70, decimal_places=2, max_digits=3)
+    hero_padding_left = models.CharField(max_length=250, default="20px")
+    hero_padding_right = models.CharField(max_length=250, default="20px")
     footer_title = models.CharField(max_length=250, blank=True)
     footer_site_info = RichTextField(blank=True)
     footer_networks = StreamField(
@@ -110,6 +112,8 @@ class HomePage(Page):
         FieldPanel("hero_image"),
         FieldPanel("hero_image_overlay_opacity"),
         FieldPanel("color_text_hero"),
+        FieldPanel("hero_padding_left"),
+        FieldPanel("hero_padding_right"),
         FieldPanel("footer_title"),
         FieldPanel("footer_site_info"),
         FieldPanel("footer_networks"),
