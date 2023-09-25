@@ -82,6 +82,10 @@ class HomePage(Page):
     color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
     color_text_hero  = models.CharField(max_length=250, blank=True, default="#FFFFFF")
     show_time = models.BooleanField(default=True)
+    background_section = models.CharField(max_length=250, blank=True, default="#FFFFFF")
+    color_text_section  = models.CharField(max_length=250, blank=True, default="white")
+    navbar_background  = models.CharField(max_length=250, default="transparent")
+    navbar_links_color  = models.CharField(max_length=250,default="white")
     message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
     menu_links = StreamField(
             [
@@ -100,6 +104,8 @@ class HomePage(Page):
         )
     content_panels = Page.content_panels + [
         FieldPanel("event"),
+        FieldPanel("navbar_background"),
+        FieldPanel("navbar_links_color"),
         FieldPanel("position_event"),
         FieldPanel("about"),
         FieldPanel("location"),
@@ -121,6 +127,8 @@ class HomePage(Page):
         FieldPanel("color_gradient_2"),
         FieldPanel("color_primary"),
         FieldPanel("show_time"),
+        FieldPanel("background_section"),
+        FieldPanel("color_text_section"),
         FieldPanel("message_show_time"),
         FieldPanel("menu_links"),
     ]
@@ -180,6 +188,8 @@ class ScheduleBlock(blocks.StructBlock):
 
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
+    background_section = models.CharField(max_length=250, blank=True, default="#FFFFFF")
+    color_text_section  = models.CharField(max_length=250, blank=True, default="black")
     segments = StreamField(
         [
             # detail segment
@@ -324,5 +334,7 @@ class SegmentPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("order"),
+        FieldPanel("background_section"),
+        FieldPanel("color_text_section"),
         FieldPanel("segments"),
     ]

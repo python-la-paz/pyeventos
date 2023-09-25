@@ -7,6 +7,10 @@ services:
     image: nginx:alpine
     restart: always
     labels:
+      - traefik.http.middlewares.limit.buffering.maxRequestBodyBytes=20971520
+      - traefik.http.middlewares.limit.buffering.memRequestBodyBytes=20971520
+      - traefik.http.middlewares.limit.buffering.maxResponseBodyBytes=20971520
+      - traefik.http.middlewares.limit.buffering.memResponseBodyBytes=20971520
       - traefik.http.routers.${TRAEFIK_ROUTE}.rule=Host(${TRAEFIK_APP_DOMAIN})
       - traefik.http.routers.${TRAEFIK_ROUTE}.tls=true
       - traefik.http.routers.${TRAEFIK_ROUTE}.tls.certresolver=lets-encrypt

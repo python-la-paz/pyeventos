@@ -52,7 +52,7 @@
 <!-- Header Area wrapper Starts -->
 <header id="header-wrap">
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar">
+    <nav class="navbar navbar-expand-lg bg-inverse fixed-top" style="background: {{page.navbar_background}};">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             {% image page.logo_image max-180x90 format-webp preserve-svg as tmp_logo  %}
@@ -67,13 +67,13 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto w-100 justify-content-end">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#header-wrap">
+                        <a class="nav-link" href="#header-wrap" style="color: {{page.navbar_links_color}} !important;">
                             Home
                         </a>
                     </li>
                     {% for menu_page in page.get_children.live.in_menu %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#{{ menu_page.slug }}">
+                        <a class="nav-link" href="#{{ menu_page.slug }}" style="color: {{page.navbar_links_color}} !important;">
                             {{ menu_page.title }}
                         </a>
                     </li>
@@ -123,7 +123,7 @@
 </header>
 
 <!-- Count Bar Start -->
-<section id="count">
+<section id="count" style="background: {{page.background_section}}; color: {{page.color_text_section}}">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10">

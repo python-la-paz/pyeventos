@@ -3,7 +3,8 @@
 <!-- Sponsors Section Start -->
 {% image segment.value.background fill-1920x1080-c10 format-webp preserve-svg as tmp_sponsor_bg %}
 <section id="{{block.slug}}" class="section-padding sponsors"
-    style="background: url({{tmp_sponsor_bg.url}}) no-repeat center;">
+    style="background: url({{tmp_sponsor_bg.url}}) no-repeat center; color: {{block.color_text_section}}"
+    >
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

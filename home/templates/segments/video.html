@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 <!-- Video Section Start -->
-<div id="{{block.slug}}" class="ready-to-play">
+<div id="{{block.slug}}" class="ready-to-play"  style="background: {{block.background_section}}; color: {{block.color_text_section}}">
   <video id="bgvid-{{block.slug}}" class="stop" loop>
     <source src="{{segment.value.url}}" type="video/mp4">
   </video>

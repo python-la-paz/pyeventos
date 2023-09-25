@@ -3,7 +3,7 @@
 {% image segment.value.image  max-512x512 format-webp preserve-svg as tmp_logo_segment %}
 
 {% if segment.value.position == "left" %}
-<section id="{{block.slug}}" class="about section-padding">
+<section id="{{block.slug}}" class="about section-padding" style="background: {{block.background_section}}; color: {{block.color_text_section}}">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12">
@@ -35,7 +35,7 @@
 </section>
 {% endif %}
 {% if segment.value.position == "right" %}
-<section id="{{block.slug}}" class="about section-padding">
+<section id="{{block.slug}}" class="about section-padding" style="background: {{block.background_section}}; color: {{block.color_text_section}}">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12 col-xs-12">
@@ -68,7 +68,7 @@
 {% endif %}
 {% if segment.value.position == "empty" %}
 
-<section id="{{block.slug}}" class="about section-padding">
+<section id="{{block.slug}}" class="about section-padding" style="background: {{block.background_section}}; color: {{block.color_text_section}}">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-sm-12">
