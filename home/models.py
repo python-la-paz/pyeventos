@@ -102,8 +102,33 @@ class HomePage(Page):
             blank=True,
             use_json_field=True,
         )
+    favicon = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="max size 256x256 png format"
+    )
+    footer_background = models.CharField(max_length=250, blank=True, default="#161E26")
+    footer_color_text  = models.CharField(max_length=250, blank=True, default="#9e9e9e")
+    externalRaws = StreamField(
+        [
+            (
+                "external",
+                blocks.StructBlock(
+                    [
+                        ("rawHTML", blocks.RawHTMLBlock(required=False)),
+                    ]
+                ),
+            ),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
     content_panels = Page.content_panels + [
         FieldPanel("event"),
+        FieldPanel("favicon"),
         FieldPanel("navbar_background"),
         FieldPanel("navbar_links_color"),
         FieldPanel("position_event"),
@@ -120,9 +145,6 @@ class HomePage(Page):
         FieldPanel("color_text_hero"),
         FieldPanel("hero_padding_left"),
         FieldPanel("hero_padding_right"),
-        FieldPanel("footer_title"),
-        FieldPanel("footer_site_info"),
-        FieldPanel("footer_networks"),
         FieldPanel("color_gradient_1"),
         FieldPanel("color_gradient_2"),
         FieldPanel("color_primary"),
@@ -131,6 +153,12 @@ class HomePage(Page):
         FieldPanel("color_text_section"),
         FieldPanel("message_show_time"),
         FieldPanel("menu_links"),
+        FieldPanel("footer_title"),
+        FieldPanel("footer_site_info"),
+        FieldPanel("footer_networks"),
+        FieldPanel("footer_background"),
+        FieldPanel("footer_color_text"),
+        FieldPanel("externalRaws"),
     ]
     
     def get_context(self, request):

@@ -789,7 +789,6 @@ a.back-to-top:focus {
 /* only small tablets */
 @media (min-width: 768px) and (max-width: 991px) {
   .bg-inverse {
-    background: #fff !important;
     box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.06);
   }
 
@@ -2003,7 +2002,7 @@ h1 {
 
 /* Footer Area Start */
 footer {
-  background: #161E26;
+  background: var(--footer-bg);
   text-align: center;
 }
 
@@ -2015,11 +2014,11 @@ footer {
 
 .site-info p {
   font-size: 13px;
-  color: #9e9e9e;
+  color: var(--footer-text);
 }
 
 .site-info a {
-  color: #fff;
+  color: var(--footer-text);
 }
 
 .site-info a:hover {
