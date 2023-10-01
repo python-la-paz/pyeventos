@@ -50,6 +50,11 @@
     background: rgba(0, 0, 0, {{page.hero_image_overlay_opacity}});
     }
 </style>
+{%if page.externalRaws|length > 0 %}
+    {% for extra in page.externalRaws %}
+    {{ extra.value.rawHTML }}
+    {% endfor %}
+{% endif %}
 {% endblock extra_css %}
 
 

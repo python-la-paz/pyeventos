@@ -112,6 +112,20 @@ class HomePage(Page):
     )
     footer_background = models.CharField(max_length=250, blank=True, default="#161E26")
     footer_color_text  = models.CharField(max_length=250, blank=True, default="#9e9e9e")
+    externalRaws = StreamField(
+        [
+            (
+                "external",
+                blocks.StructBlock(
+                    [
+                        ("rawHTML", blocks.RawHTMLBlock(required=False)),
+                    ]
+                ),
+            ),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
     content_panels = Page.content_panels + [
         FieldPanel("event"),
         FieldPanel("favicon"),
@@ -144,6 +158,7 @@ class HomePage(Page):
         FieldPanel("footer_networks"),
         FieldPanel("footer_background"),
         FieldPanel("footer_color_text"),
+        FieldPanel("externalRaws"),
     ]
     
     def get_context(self, request):
