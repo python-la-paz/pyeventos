@@ -7,6 +7,9 @@
 
 {% block extra_css %}
 {% image page.hero_image fill-1900x740-c20 format-webp preserve-svg as tmp_hero %}
+{% image page.favicon max-256x256 as tmp_favicon %}
+
+<link rel="icon" type="image/png" href="{{ tmp_favicon.url }}" />
 <style>
     :root {
         --cg1: {{page.color_gradient_1}};
@@ -15,6 +18,8 @@
         --text-hero: {{page.color_text_hero}};
         --hero-padding-left: {{page.hero_padding_left}};
         --hero-padding-right: {{page.hero_padding_right}};
+        --footer-bg: {{page.footer_background}};
+        --footer-text: {{page.footer_color_text}};
     }
 </style>
 <!-- Bootstrap CSS -->
@@ -80,7 +85,7 @@
                     {% endfor %}
                     {% for menu_external in page.menu_links %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ menu_external.value.url }}" target="_blank">
+                        <a class="nav-link" href="{{ menu_external.value.url }}" target="_blank" style="color: {{page.navbar_links_color}} !important;">
                             {{ menu_external.value.text }}
                         </a>
                     </li>
@@ -188,7 +193,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="subscribe-inner wow fadeInDown" data-wow-delay="0.3s">
-                    <h2 class="subscribe-title">{{page.footer_title}}</h2>
+                    <h2 class="subscribe-title" style="color: var(--footer-text);">{{page.footer_title}}</h2>
                 </div>
                 <div class="footer-logo">
                     <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}">
