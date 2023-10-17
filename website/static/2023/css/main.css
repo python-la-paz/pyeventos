@@ -5,7 +5,6 @@ html {
 }
 
 body {
-  background: #fff;
   font-size: 15px;
   font-weight: 400;
   font-family: 'Open Sans', sans-serif;
@@ -198,7 +197,7 @@ ol li {
   font-size: 14px;
   padding: 10px 30px;
   line-height: 22px;
-  border-radius: 30px;
+  border-radius: 0px;
   font-family: 'Roboto', sans-serif;
   cursor: pointer;
   font-weight: 500;
@@ -327,7 +326,7 @@ a.back-to-top:focus {
 
 #preloader {
   position: fixed;
-  background: #fff;
+  background: var(--cg1);
   top: 0;
   left: 0;
   width: 100%;
@@ -2248,21 +2247,25 @@ footer {
 }
 
 .pricing {
-  background: #f8fafa;
   position: relative;
 }
 
 .pricing .price-block-wrapper {
-  display: inline-block;
   width: 100%;
   text-align: center;
-  box-shadow: 0 8px 24px #E2E8ED;
+  box-shadow: 0 8px 24px #a0a0a0;
   border-radius: 4px;
-  background: #fff;
   padding: 50px 40px;
   -webkit-transition: all 300ms ease-in-out;
   -moz-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;
+  height: -webkit-fill-available;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: fill-available;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .pricing .price-block-wrapper .icon {
