@@ -14,8 +14,8 @@
         <div class="row">
             {% for tier in segment.value.tiers %}
             {% image tier.image  max-100x100 format-webp preserve-svg as tmp_tier %}
-            <div class="col-lg-4 col-md-6 col-xa-12 mb-3">
-                <div class="price-block-wrapper wow fadeInLeft {{tier.classname}}" data-wow-delay="0.2s">
+            <div class="col-lg-4 col-md-6 col-xa-12 mb-3"  style="display: flex;">
+                <div class="price-block-wrapper {{tier.classname}}" style="background-color: {{tier.bg_color}};">
                     <div class="colmun-title">
                         <h3>{{tier.name}}</h3>
                     </div>
@@ -34,7 +34,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <a href="{{tier.url}}" class="btn btn-common" target="_blank">{{tier.url_text}}</a>
+                    <a href="{{tier.url}}" class="btn btn-common" target="_blank" style="position: absolute;bottom: 20px;">{{tier.url_text}}</a>
                 </div>
             </div>
             {% endfor %}

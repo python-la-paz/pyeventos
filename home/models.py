@@ -198,6 +198,7 @@ class TiersBlock(blocks.StructBlock):
     no_benefits = blocks.ListBlock(blocks.CharBlock(required=False))
     url = blocks.URLBlock(required=False)
     url_text = blocks.CharBlock(required=False, default="Buy now")
+    bg_color = blocks.CharBlock(required=False, default="#fff")
 
 class ScheduleDetailBlock(blocks.StructBlock):
     menu_title = blocks.CharBlock()
