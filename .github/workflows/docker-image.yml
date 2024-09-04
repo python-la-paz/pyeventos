@@ -4,9 +4,6 @@ name: Docker Image CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
 env:
   IMAGE_TAG: ${{ github.sha }}
   DOCKER_IMAGE: ${{ vars.DOCKER_IMAGE }}

@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  app:
+    volumes:
+      - ..:/workspaces:cached
+    command: sleep infinity
+  database:
+    extends:
+      file: docker-compose.dev.yaml
+      service: database
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    environment:
+      ADMINER_DEFAULT_SERVER: database

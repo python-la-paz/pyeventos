@@ -46,3 +46,6 @@ docker-compose.*.yaml
 backend.env
 database.env
 traefik.env
+.dockerignore
+.gitignore
+.devcontainer/
