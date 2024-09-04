@@ -200,8 +200,33 @@
                 <div class="subscribe-inner wow fadeInDown" data-wow-delay="0.3s">
                     <h2 class="subscribe-title" style="color: var(--footer-text);">{{page.footer_title}}</h2>
                 </div>
-                <div class="footer-logo">
-                    <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}">
+                <div class="pb-5 row justify-content-center">
+                    <div class="footer-logo">
+                        <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}">
+                    </div>
+                    <div class ="ml-sm-5">
+                        <p style="color: var(--footer-text);">Eventos pasados</p>
+                        {% for descendant in page.get_descendants %}
+                            {%if descendant.live and descendant.content_type == page.content_type%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ descendant.get_url }}" 
+                                    target="_blank" style="color: {{page.navbar_links_color}} !important;">
+                                        {{ descendant.title}} 
+                                    </a>
+                                </li>
+                            {%endif%}
+                        {% endfor %}
+                        {% for sibling in page.get_siblings%}
+                            {%if sibling.title != page.title and sibling.live%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ sibling.get_url }}" 
+                                    target="_blank" style="color: {{page.navbar_links_color}} !important;">
+                                        {{ sibling.title}} 
+                                    </a>
+                                </li>
+                            {%endif%}
+                        {% endfor %}
+                    </div> 
                 </div>
                 <div class="social-icons-footer">
                     <ul>
