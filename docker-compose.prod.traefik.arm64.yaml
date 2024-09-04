@@ -37,7 +37,7 @@ services:
     networks:
       - internal
   database:
-    image: liupeng0518/mysql:5.7-arm64
+    image: liupeng0518/mysql:8.0-arm64
     restart: always
     env_file:
       - database/.env
