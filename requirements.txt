@@ -3,3 +3,4 @@ wagtail>=6.2,<6.3
 django-mathfilters==1.0.0
 whitenoise==6.2.0
 mysqlclient==2.2.1
+wagtail-color-panel==1.5.0
