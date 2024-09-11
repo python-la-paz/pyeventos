@@ -77,6 +77,10 @@ class HomePage(Page):
         blank=True,
         use_json_field=True,
     )
+    primaryFontURL = models.URLField(max_length=250, blank=True)
+    primaryFontFamily= models.CharField(max_length=250, default="sans-serif")
+    secondaryFontURL = models.URLField(max_length=250, blank=True)
+    secondaryFontFamily = models.CharField(max_length=250, default="sans-serif")
     color_gradient_1 = models.CharField(max_length=250, blank=True, default="#FF4D79")
     color_gradient_2 = models.CharField(max_length=250, blank=True, default="#FF809F")
     color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
@@ -145,6 +149,10 @@ class HomePage(Page):
         FieldPanel("color_text_hero"),
         FieldPanel("hero_padding_left"),
         FieldPanel("hero_padding_right"),
+        FieldPanel("primaryFontURL"),
+        FieldPanel("primaryFontFamily"),
+        FieldPanel("secondaryFontURL"),
+        FieldPanel("secondaryFontFamily"),
         FieldPanel("color_gradient_1"),
         FieldPanel("color_gradient_2"),
         FieldPanel("color_primary"),
