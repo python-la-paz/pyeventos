@@ -1,4 +1,4 @@
-# ¡Bienvenidos al repositorio de Eventos de Python La Paz *_Python La Paz_* ! 💻🚀
+# ¡Bienvenidos al repositorio de Eventos de *_Python La Paz_* ! 💻🚀
 
 En este repositorio encontrarás un administrador de eventos libre con el cual podrás construir y armar la página de presentación de tu evento de manera sencilla,
 
