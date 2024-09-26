@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "mathfilters",
-    'wagtail.contrib.search_promotions'
+    'wagtail.contrib.search_promotions',
+    'wagtail_color_panel'
 ]
 
 MIDDLEWARE = [
