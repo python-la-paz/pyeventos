@@ -382,3 +382,7 @@ class SegmentPage(Page):
         FieldPanel("segments"),
         NativeColorPanel("background_section")
     ]
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['parent'] = self.get_parent().specific
+        return context

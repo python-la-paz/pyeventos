@@ -324,15 +324,6 @@ a.back-to-top:focus {
   text-decoration: none;
 }
 
-#preloader {
-  position: fixed;
-  background: var(--cg1);
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999999999;
-}
 
 .sk-circle {
   margin: 0px auto;
