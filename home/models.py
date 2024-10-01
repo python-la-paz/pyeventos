@@ -4,7 +4,8 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-
+from wagtail_color_panel.fields import ColorField
+from wagtail_color_panel.edit_handlers import NativeColorPanel
 
 class HomePage(Page):
     event = RichTextField(blank=True)
@@ -77,19 +78,21 @@ class HomePage(Page):
         blank=True,
         use_json_field=True,
     )
+
     primaryFontURL = models.URLField(max_length=250, blank=True)
     primaryFontFamily= models.CharField(max_length=250, default="sans-serif")
     secondaryFontURL = models.URLField(max_length=250, blank=True)
     secondaryFontFamily = models.CharField(max_length=250, default="sans-serif")
-    color_gradient_1 = models.CharField(max_length=250, blank=True, default="#FF4D79")
-    color_gradient_2 = models.CharField(max_length=250, blank=True, default="#FF809F")
-    color_primary = models.CharField(max_length=250, blank=True, default="#ff4a67")
-    color_text_hero  = models.CharField(max_length=250, blank=True, default="#FFFFFF")
+    color_gradient_1 = ColorField(max_length=250, blank=True, default="#FF4D79")
+    color_gradient_2 = ColorField(max_length=250, blank=True, default="#FF809F")
+    color_primary = ColorField(max_length=250, blank=True, default="#ff4a67")
+    color_text_hero  = ColorField(max_length=250, blank=True, default="#FFFFFF")
+
     show_time = models.BooleanField(default=True)
-    background_section = models.CharField(max_length=250, blank=True, default="#FFFFFF")
-    color_text_section  = models.CharField(max_length=250, blank=True, default="white")
-    navbar_background  = models.CharField(max_length=250, default="transparent")
-    navbar_links_color  = models.CharField(max_length=250,default="white")
+    background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    color_text_section  = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    navbar_background  = ColorField(max_length=250, blank=True, default="transparent")
+    navbar_links_color  = ColorField(max_length=250, blank=True, default="#FFFFFF")
     message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
     menu_links = StreamField(
             [
@@ -133,8 +136,8 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("event"),
         FieldPanel("favicon"),
-        FieldPanel("navbar_background"),
-        FieldPanel("navbar_links_color"),
+        NativeColorPanel("navbar_background"),
+        NativeColorPanel("navbar_links_color"),
         FieldPanel("position_event"),
         FieldPanel("about"),
         FieldPanel("location"),
@@ -146,26 +149,30 @@ class HomePage(Page):
         FieldPanel("logo_image_big"),
         FieldPanel("hero_image"),
         FieldPanel("hero_image_overlay_opacity"),
-        FieldPanel("color_text_hero"),
+        NativeColorPanel("color_text_hero"),
         FieldPanel("hero_padding_left"),
         FieldPanel("hero_padding_right"),
+
         FieldPanel("primaryFontURL"),
         FieldPanel("primaryFontFamily"),
         FieldPanel("secondaryFontURL"),
         FieldPanel("secondaryFontFamily"),
-        FieldPanel("color_gradient_1"),
-        FieldPanel("color_gradient_2"),
-        FieldPanel("color_primary"),
+      
+        NativeColorPanel("color_gradient_1"),
+        NativeColorPanel("color_gradient_2"),
+        NativeColorPanel("color_primary"),
+
         FieldPanel("show_time"),
-        FieldPanel("background_section"),
-        FieldPanel("color_text_section"),
+        NativeColorPanel("background_section"),
+        NativeColorPanel("color_text_section"),
         FieldPanel("message_show_time"),
         FieldPanel("menu_links"),
         FieldPanel("footer_title"),
         FieldPanel("footer_site_info"),
         FieldPanel("footer_networks"),
-        FieldPanel("footer_background"),
-        FieldPanel("footer_color_text"),
+        NativeColorPanel("color_gradient_1"),
+        NativeColorPanel("footer_background"),
+        NativeColorPanel("footer_color_text"),
         FieldPanel("externalRaws"),
     ]
     
@@ -225,8 +232,8 @@ class ScheduleBlock(blocks.StructBlock):
 
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
-    background_section = models.CharField(max_length=250, blank=True, default="#FFFFFF")
-    color_text_section  = models.CharField(max_length=250, blank=True, default="black")
+    background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    color_text_section  = ColorField(max_length=250, blank=True, default="black")
     segments = StreamField(
         [
             # detail segment
@@ -371,7 +378,7 @@ class SegmentPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("order"),
-        FieldPanel("background_section"),
-        FieldPanel("color_text_section"),
+        NativeColorPanel("color_text_section"),
         FieldPanel("segments"),
+        NativeColorPanel("background_section")
     ]
