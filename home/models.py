@@ -78,10 +78,16 @@ class HomePage(Page):
         blank=True,
         use_json_field=True,
     )
+
+    primaryFontURL = models.URLField(max_length=250, blank=True)
+    primaryFontFamily= models.CharField(max_length=250, default="sans-serif")
+    secondaryFontURL = models.URLField(max_length=250, blank=True)
+    secondaryFontFamily = models.CharField(max_length=250, default="sans-serif")
     color_gradient_1 = ColorField(max_length=250, blank=True, default="#FF4D79")
     color_gradient_2 = ColorField(max_length=250, blank=True, default="#FF809F")
     color_primary = ColorField(max_length=250, blank=True, default="#ff4a67")
     color_text_hero  = ColorField(max_length=250, blank=True, default="#FFFFFF")
+
     show_time = models.BooleanField(default=True)
     background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
     color_text_section  = ColorField(max_length=250, blank=True, default="#FFFFFF")
@@ -146,9 +152,16 @@ class HomePage(Page):
         NativeColorPanel("color_text_hero"),
         FieldPanel("hero_padding_left"),
         FieldPanel("hero_padding_right"),
+
+        FieldPanel("primaryFontURL"),
+        FieldPanel("primaryFontFamily"),
+        FieldPanel("secondaryFontURL"),
+        FieldPanel("secondaryFontFamily"),
+      
         NativeColorPanel("color_gradient_1"),
         NativeColorPanel("color_gradient_2"),
         NativeColorPanel("color_primary"),
+
         FieldPanel("show_time"),
         NativeColorPanel("background_section"),
         NativeColorPanel("color_text_section"),

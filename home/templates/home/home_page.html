@@ -43,6 +43,8 @@
         --hero-padding-right: {{page.hero_padding_right}};
         --footer-bg: {{page.footer_background}};
         --footer-text: {{page.footer_color_text}};
+        --primary-font: '{{page.primaryFontFamily}}';
+        --secondary-font: {{page.secondaryFontFamily}};
     }
 </style>
 <!-- Bootstrap CSS -->
@@ -57,6 +59,15 @@
 <link rel="stylesheet" type="text/css" href="{% static '2023/css/main.css' %}">
 <!-- Responsive Style -->
 <link rel="stylesheet" type="text/css" href="{% static '2023/css/responsive.css' %}">
+
+{%if page.value.primaryFontURL != "" %}
+<link href="{{page.primaryFontURL}}" rel="stylesheet">
+{%endif%}
+
+{%if page.value.secondaryFontURL != "" %}
+<link href="{{page.secondaryFontURL}}" rel="stylesheet">
+{%endif%}
+
 <style>
     .hero-area-bg-image {
         background: url("{{ tmp_hero.url }}") no-repeat;
@@ -154,7 +165,6 @@
     </div>
     <!-- Hero Area End -->
 </header>
-
 <!-- Count Bar Start -->
 <section id="count" style="background: {{page.background_section}}; color: {{page.color_text_section}}">
     <div class="container">
