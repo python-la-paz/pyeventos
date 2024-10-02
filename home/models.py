@@ -85,7 +85,7 @@ class HomePage(Page):
     show_time = models.BooleanField(default=True)
     background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
     color_text_section  = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    navbar_background  = ColorField(max_length=250, blank=True, default="transparent")
+    navbar_background  = ColorField(max_length=250, blank=True, default="#000000")
     navbar_links_color  = ColorField(max_length=250, blank=True, default="#FFFFFF")
     message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
     menu_links = StreamField(
@@ -220,7 +220,7 @@ class ScheduleBlock(blocks.StructBlock):
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
     background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    color_text_section  = ColorField(max_length=250, blank=True, default="black")
+    color_text_section  = ColorField(max_length=250, blank=True, default="#000000")
     segments = StreamField(
         [
             # detail segment
