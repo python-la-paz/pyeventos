@@ -203,26 +203,28 @@
                 <div class="footer-logo">
                     <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}">
                 </div>
-                <div class ="mb-5">
-                    <div class="subscribe-inner" style="padding: 10px;">
-                        <h2 class="subscribe-title" style="color: var(--footer-text); margin-bottom:10px;">Eventos pasados</h2>
+                <div class ="mb-5 row justify-content-center">
+                    <div class="past-events text-start mb-3">
+                        <div class="subscribe-inner" style="padding: 16px;">
+                            <h2 class="subscribe-title" style="color: var(--footer-text); margin-bottom:10px;">Eventos pasados</h2>
+                        </div>
+                        {% for sibling in page.get_siblings %}
+                            {% if sibling.title and sibling.live and sibling.get_parent.content_type == page.content_type %}
+                                <a class="nav-link" href="{{ sibling.get_url }}" 
+                                    target="_blank" style="color: {{ page.navbar_links_color }} !important;">
+                                    {{ sibling.title }} 
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                        {% for descendant in page.get_descendants %}
+                            {% if descendant.live and descendant.content_type == page.content_type %}
+                                <a class="nav-link" href="{{ descendant.get_url }}" 
+                                    target="_blank" style="color: {{ page.navbar_links_color }} !important;">
+                                    {{ descendant.title }} 
+                                </a>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% for sibling in page.get_siblings%}
-                        {%if sibling.title and sibling.live and sibling.get_parent.content_type == page.content_type%}
-                            <a class="nav-link" href="{{ sibling.get_url }}" 
-                            target="_blank" style="color: {{page.navbar_links_color}} !important;">
-                                {{ sibling.title}} 
-                            </a>
-                        {%endif%}
-                    {% endfor %}
-                    {% for descendant in page.get_descendants %}
-                        {%if descendant.live and descendant.content_type == page.content_type%}
-                            <a class="nav-link" href="{{ descendant.get_url }}" 
-                            target="_blank" style="color: {{page.navbar_links_color}} !important;">
-                                {{descendant.title}} 
-                            </a>
-                        {%endif%}
-                    {% endfor %}
                 </div>
                 <div class="social-icons-footer">
                     <ul>

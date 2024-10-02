@@ -2545,3 +2545,9 @@ footer {
   padding: revert;
   list-style: decimal !important;
 }
+
+.past-events {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alineación a la izquierda */
+}
