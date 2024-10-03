@@ -8,6 +8,29 @@
 {% block extra_css %}
 {% image page.hero_image fill-1900x740-c20 format-webp preserve-svg as tmp_hero %}
 {% image page.favicon max-256x256 as tmp_favicon %}
+{% block meta_tags %}
+
+<meta property="og:title" content="{{ page.event|striptags }}">
+<meta property="og:description" content="{{ page.about|striptags }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+{% if page.logo_image %}
+    {% image page.logo_image original as tmp_og_image %}
+    <meta property="og:image" itemprop="image" content="{{ request.build_absolute_uri|slice:':-1' }}{{ tmp_og_image.url }}">
+{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image:width" content="300">
+<meta property="og:image:height" content="300">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.event|striptags }}">
+<meta name="twitter:description" content="{{ page.about|striptags }}">
+<meta name="twitter:url" content="{{ request.build_absolute_uri }}">
+{% if page.logo_image %}
+    {% image page.logo_image original as tmp_twitter_image %}
+    <meta name="twitter:image" content="{{ request.build_absolute_uri|slice:':-1' }}{{ tmp_twitter_image.url }}">
+{% endif %}
+{% endblock %}
 
 <link rel="icon" type="image/png" href="{{ tmp_favicon.url }}" />
 <style>
@@ -20,6 +43,8 @@
         --hero-padding-right: {{page.hero_padding_right}};
         --footer-bg: {{page.footer_background}};
         --footer-text: {{page.footer_color_text}};
+        --primary-font: '{{page.primaryFontFamily}}';
+        --secondary-font: {{page.secondaryFontFamily}};
     }
 </style>
 <!-- Bootstrap CSS -->
@@ -34,6 +59,15 @@
 <link rel="stylesheet" type="text/css" href="{% static '2023/css/main.css' %}">
 <!-- Responsive Style -->
 <link rel="stylesheet" type="text/css" href="{% static '2023/css/responsive.css' %}">
+
+{%if page.value.primaryFontURL != "" %}
+<link href="{{page.primaryFontURL}}" rel="stylesheet">
+{%endif%}
+
+{%if page.value.secondaryFontURL != "" %}
+<link href="{{page.secondaryFontURL}}" rel="stylesheet">
+{%endif%}
+
 <style>
     .hero-area-bg-image {
         background: url("{{ tmp_hero.url }}") no-repeat;
@@ -131,7 +165,6 @@
     </div>
     <!-- Hero Area End -->
 </header>
-
 <!-- Count Bar Start -->
 <section id="count" style="background: {{page.background_section}}; color: {{page.color_text_section}}">
     <div class="container">
@@ -203,6 +236,23 @@
                 <div class="footer-logo">
                     <img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}">
                 </div>
+                <div class ="mb-5 row justify-content-center">
+                    {% if exist_descendants %}
+                    <div class="past-events text-start mb-3">
+                        <div class="subscribe-inner" style="padding: 16px;">
+                            <h2 class="subscribe-title" style="color: var(--footer-text); margin-bottom:10px;">Eventos pasados</h2>
+                        </div>
+                        {% for descendant in page.get_descendants %}
+                            {% if descendant.live and descendant.content_type == page.content_type %}
+                                <a class="nav-link" href="{{ descendant.get_url }}" 
+                                    target="_blank" style="color: {{ page.navbar_links_color }} !important;">
+                                    {{ descendant.title }} 
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
                 <div class="social-icons-footer">
                     <ul>
                         {% for social in page.footer_networks %}
@@ -223,23 +273,6 @@
 <a href="#" class="back-to-top">
     <i class="lni lni-chevron-up"></i>
 </a>
-
-<div id="preloader">
-    <div class="sk-circle">
-        <div class="sk-circle1 sk-child"></div>
-        <div class="sk-circle2 sk-child"></div>
-        <div class="sk-circle3 sk-child"></div>
-        <div class="sk-circle4 sk-child"></div>
-        <div class="sk-circle5 sk-child"></div>
-        <div class="sk-circle6 sk-child"></div>
-        <div class="sk-circle7 sk-child"></div>
-        <div class="sk-circle8 sk-child"></div>
-        <div class="sk-circle9 sk-child"></div>
-        <div class="sk-circle10 sk-child"></div>
-        <div class="sk-circle11 sk-child"></div>
-        <div class="sk-circle12 sk-child"></div>
-    </div>
-</div>
 
 
 {% endblock content %}

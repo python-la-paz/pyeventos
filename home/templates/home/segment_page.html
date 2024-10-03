@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load static %}
+
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+{% image parent.hero_image fill-1900x740-c20 format-webp preserve-svg as tmp_hero %}
+{% image parent.favicon max-256x256 as tmp_favicon %}
+<link rel="icon" type="image/png" href="{{ tmp_favicon.url }}" />
+<style>
+    :root {
+        --cg1: {{parent.color_gradient_1}};
+        --cg2: {{parent.color_gradient_2}};
+        --primary: {{parent.color_primary}};
+        --text-hero: {{parent.color_text_hero}};
+        --hero-padding-left: {{parent.hero_padding_left}};
+        --hero-padding-right: {{parent.hero_padding_right}};
+        --footer-bg: {{parent.footer_background}};
+        --footer-text: {{parent.footer_color_text}};
+    }
+</style>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/bootstrap.min.css' %}">
+<!-- Icon -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/fonts/lineicons.css' %}">
+<!-- Nivo Lightbox -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/nivo-lightbox.css' %}">
+<!-- Animate -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/animate.css' %}">
+<!-- Main Style -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/main.css' %}">
+<!-- Responsive Style -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/responsive.css' %}">
+
+<style>
+    .hero-area-bg-image {
+        background: url("{{ tmp_hero.url }}") no-repeat;
+        background-size: cover;
+        background-position-y: top;
+        background-position-x: center;
+    }
+    .hero-area .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, {{parent.hero_image_overlay_opacity}});
+    }
+</style>
+{% endblock extra_css %}
+
+{% block content %}
+<header id="header-wrap"></header>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-inverse fixed-top" style="background: {{parent.navbar_background}};">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            {% image parent.logo_image max-180x90 format-webp preserve-svg as tmp_logo  %}
+
+            <a href="/" class="navbar-brand"><img src="{{ tmp_logo.url }}" alt="{{ tmp_logo.alt }}"
+                
+            ></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="lni lni-menu"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#header-wrap" style="color: {{parent.navbar_links_color}} !important;" disabled>
+                            {{page.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Area Start -->
+    <div class="hero-area hero-area-bg hero-area-bg-image">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 col-sm-12">
+                    <div class="contents text-center" style="text-align: {{parent.position_event}}! important;">
+                        {% if parent.logo_image_big is not None %}
+                        {% image parent.logo_image_big  max-300x150 format-webp preserve-svg as tmp_logo_big %}
+                        <img src="{{ tmp_logo_big.url }}" alt="{{ tmp_logo_big.alt }}">
+                        <br>
+                        <br>
+                        
+                        {% endif %}
+
+                        <p class="banner-info">{{ parent.literal_date }} {{parent.location}}</p>
+                        <div class="head-title">{{ parent.event|richtext }}</div>
+                        <div class="banner-desc" style="text-align: justify;">{{ parent.about|richtext }}</div>
+                        <br>
+                        {% if parent.url_get_tickets is not None and parent.url_get_tickets != "" %}
+                        <div class="banner-btn">
+                            <a href="{{parent.url_get_tickets}}" class="btn btn-common"
+                                target="_blank">{{parent.text_get_tickets}}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+</header>
+
+<section id="count" style="background: {{parent.background_section}}; color: {{parent.color_text_section}}">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="count-wrapper text-center">
+                    <div class="time-countdown wow fadeInUp" data-wow-delay="0.2s">
+                        <div id="clock" class="time-count"></div>
+                        <input type="hidden" id="clock_date" value="{{ parent.event_date|date:'Y/m/d' }}">
+                        <input type="hidden" id="clock_date_show" value="{{ parent.show_time }}">
+                        <input type="hidden" id="clock_date_show_message" value="{{ parent.message_show_time }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% for segment in page.segments %}
+{% if segment.block_type == 'detail_segment' %}
+<div>
+    {% include 'segments/segment.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'video_segment' %}
+<div>
+    {% include 'segments/video.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'information_segment' %}
+<div>
+    {% include 'segments/information_bar.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'sponsor_segment' %}
+<div>
+    {% include 'segments/sponsor.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'maps_segment' %}
+<div>
+    {% include 'segments/maps.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'pricing_segment' %}
+<div>
+    {% include 'segments/pricing.html' %}
+</div>
+{% endif %}
+{% if segment.block_type == 'schedule_segment' %}
+<div>
+    {% include 'segments/schedule.html' %}
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}
+{% block extra_js %}
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script type="" src="{% static '2023/js/jquery-min.js' %}"></script>
+<script src="{% static '2023/js/popper.min.js' %}"></script>
+<script src="{% static '2023/js/bootstrap.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.countdown.min.js' %}"></script>
+<script src="{% static '2023/js/waypoints.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static '2023/js/jquery.nav.js' %}"></script>
+<script src="{% static '2023/js/jquery.easing.min.js' %}"></script>
+<script src="{% static '2023/js/wow.js' %}"></script>
+<script src="{% static '2023/js/nivo-lightbox.js' %}"></script>
+<script src="{% static '2023/js/video.js' %}"></script>
+<script src="{% static '2023/js/main.js' %}"></script>
+{% endblock %}
