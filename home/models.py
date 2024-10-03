@@ -1,11 +1,12 @@
 from django.db import models
-from wagtail.fields import RichTextField, StreamField
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail_color_panel.fields import ColorField
+from wagtail.models import Page
 from wagtail_color_panel.edit_handlers import NativeColorPanel
+from wagtail_color_panel.fields import ColorField
+
 
 class HomePage(Page):
     event = RichTextField(blank=True)
@@ -48,7 +49,9 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    hero_image_overlay_opacity = models.DecimalField(default=0.70, decimal_places=2, max_digits=3)
+    hero_image_overlay_opacity = models.DecimalField(
+        default=0.70, decimal_places=2, max_digits=3
+    )
     hero_padding_left = models.CharField(max_length=250, default="20px")
     hero_padding_right = models.CharField(max_length=250, default="20px")
     footer_title = models.CharField(max_length=250, blank=True)
@@ -80,45 +83,52 @@ class HomePage(Page):
     )
 
     primaryFontURL = models.URLField(max_length=250, blank=True)
-    primaryFontFamily= models.CharField(max_length=250, default="sans-serif")
+    primaryFontFamily = models.CharField(max_length=250, default="sans-serif")
     secondaryFontURL = models.URLField(max_length=250, blank=True)
     secondaryFontFamily = models.CharField(max_length=250, default="sans-serif")
     color_gradient_1 = ColorField(max_length=250, blank=True, default="#FF4D79")
     color_gradient_2 = ColorField(max_length=250, blank=True, default="#FF809F")
     color_primary = ColorField(max_length=250, blank=True, default="#ff4a67")
-    color_text_hero  = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    color_text_hero = ColorField(max_length=250, blank=True, default="#FFFFFF")
 
     show_time = models.BooleanField(default=True)
     background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    color_text_section  = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    navbar_background  = ColorField(max_length=250, blank=True, default="#000000")
-    navbar_links_color  = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    message_show_time = models.CharField(max_length=250, blank=True, default="Próximamente...")
+    color_text_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    navbar_background = ColorField(max_length=250, blank=True, default="#000000")
+    navbar_links_color = ColorField(max_length=250, blank=True, default="#FFFFFF")
+    message_show_time = models.CharField(
+        max_length=250, blank=True, default="Próximamente..."
+    )
     menu_links = StreamField(
-            [
-                (
-                    "menu_links",
-                    blocks.StructBlock(
-                        [
-                            ("text", blocks.CharBlock(max_length=250, required=True)),
-                            ("url",blocks.CharBlock(max_length=250, required=True, default="#")),
-                        ]
-                    ),
+        [
+            (
+                "menu_links",
+                blocks.StructBlock(
+                    [
+                        ("text", blocks.CharBlock(max_length=250, required=True)),
+                        (
+                            "url",
+                            blocks.CharBlock(
+                                max_length=250, required=True, default="#"
+                            ),
+                        ),
+                    ]
                 ),
-            ],
-            blank=True,
-            use_json_field=True,
-        )
+            ),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
     favicon = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        help_text="max size 256x256 png format"
+        help_text="max size 256x256 png format",
     )
     footer_background = models.CharField(max_length=250, blank=True, default="#161E26")
-    footer_color_text  = models.CharField(max_length=250, blank=True, default="#9e9e9e")
+    footer_color_text = models.CharField(max_length=250, blank=True, default="#9e9e9e")
     externalRaws = StreamField(
         [
             (
@@ -152,16 +162,13 @@ class HomePage(Page):
         NativeColorPanel("color_text_hero"),
         FieldPanel("hero_padding_left"),
         FieldPanel("hero_padding_right"),
-
         FieldPanel("primaryFontURL"),
         FieldPanel("primaryFontFamily"),
         FieldPanel("secondaryFontURL"),
         FieldPanel("secondaryFontFamily"),
-      
         NativeColorPanel("color_gradient_1"),
         NativeColorPanel("color_gradient_2"),
         NativeColorPanel("color_primary"),
-
         FieldPanel("show_time"),
         NativeColorPanel("background_section"),
         NativeColorPanel("color_text_section"),
@@ -175,12 +182,17 @@ class HomePage(Page):
         NativeColorPanel("footer_color_text"),
         FieldPanel("externalRaws"),
     ]
-    
+
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
         segments = SegmentPage.objects.child_of(self).live().order_by("order")
         context["segments"] = segments  # sorted (segments, key=lambda x: x.order)
+        context["exist_descendants"] = [
+            descendant
+            for descendant in self.get_descendants()
+            if descendant.live and descendant.content_type == self.content_type
+        ]
         return context
 
 
@@ -203,6 +215,7 @@ class SponsorBlock(blocks.StructBlock):
     )
     url = blocks.URLBlock(required=False)
 
+
 class TiersBlock(blocks.StructBlock):
     classname = blocks.CharBlock(required=False)
     name = blocks.CharBlock()
@@ -215,6 +228,7 @@ class TiersBlock(blocks.StructBlock):
     url_text = blocks.CharBlock(required=False, default="Buy now")
     bg_color = blocks.CharBlock(required=False, default="#fff")
 
+
 class ScheduleDetailBlock(blocks.StructBlock):
     menu_title = blocks.CharBlock()
     menu_subtitle = blocks.CharBlock(default="Workshop")
@@ -225,15 +239,17 @@ class ScheduleDetailBlock(blocks.StructBlock):
     location = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
 
+
 class ScheduleBlock(blocks.StructBlock):
     name = blocks.CharBlock()
     detail = blocks.CharBlock()
     schedule_details = blocks.ListBlock(ScheduleDetailBlock(required=False))
 
+
 class SegmentPage(Page):
     order = models.IntegerField(default=0)
     background_section = ColorField(max_length=250, blank=True, default="#FFFFFF")
-    color_text_section  = ColorField(max_length=250, blank=True, default="#000000")
+    color_text_section = ColorField(max_length=250, blank=True, default="#000000")
     segments = StreamField(
         [
             # detail segment
@@ -268,7 +284,8 @@ class SegmentPage(Page):
                             ),
                         ),
                         (
-                            "list_style",blocks.BooleanBlock(required=False, default=False),
+                            "list_style",
+                            blocks.BooleanBlock(required=False, default=False),
                         ),
                     ]
                 ),
@@ -380,9 +397,10 @@ class SegmentPage(Page):
         FieldPanel("order"),
         NativeColorPanel("color_text_section"),
         FieldPanel("segments"),
-        NativeColorPanel("background_section")
+        NativeColorPanel("background_section"),
     ]
+
     def get_context(self, request):
         context = super().get_context(request)
-        context['parent'] = self.get_parent().specific
+        context["parent"] = self.get_parent().specific
         return context
