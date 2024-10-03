@@ -131,37 +131,37 @@
 {% for segment in page.segments %}
 {% if segment.block_type == 'detail_segment' %}
 <div>
-    {% include 'segments/segment.html' %}
+    {% include 'segments/segment.html' with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'video_segment' %}
 <div>
-    {% include 'segments/video.html' %}
+    {% include 'segments/video.html'  with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'information_segment' %}
 <div>
-    {% include 'segments/information_bar.html' %}
+    {% include 'segments/information_bar.html' with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'sponsor_segment' %}
 <div>
-    {% include 'segments/sponsor.html' %}
+    {% include 'segments/sponsor.html'  with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'maps_segment' %}
 <div>
-    {% include 'segments/maps.html' %}
+    {% include 'segments/maps.html' with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'pricing_segment' %}
 <div>
-    {% include 'segments/pricing.html' %}
+    {% include 'segments/pricing.html' with block=page  %}
 </div>
 {% endif %}
 {% if segment.block_type == 'schedule_segment' %}
 <div>
-    {% include 'segments/schedule.html' %}
+    {% include 'segments/schedule.html' with block=page   %}
 </div>
 {% endif %}
 {% endfor %}
