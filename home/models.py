@@ -181,6 +181,7 @@ class HomePage(Page):
         context = super().get_context(request)
         segments = SegmentPage.objects.child_of(self).live().order_by("order")
         context["segments"] = segments  # sorted (segments, key=lambda x: x.order)
+        context["exist_descendants"] =  [descendant for descendant in self.get_descendants() if descendant.live and descendant.content_type == self.content_type]
         return context
 
 
