@@ -33,6 +33,8 @@
 {% endblock %}
 
 <link rel="icon" type="image/png" href="{{ tmp_favicon.url }}" />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" href="{% static '2023/css/bootstrap.min.css' %}">
 <style>
     :root {
         --cg1: {{page.color_gradient_1}};
@@ -47,8 +49,6 @@
         --secondary-font: {{page.secondaryFontFamily}};
     }
 </style>
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" type="text/css" href="{% static '2023/css/bootstrap.min.css' %}">
 <!-- Icon -->
 <link rel="stylesheet" type="text/css" href="{% static '2023/fonts/lineicons.css' %}">
 <!-- Nivo Lightbox -->

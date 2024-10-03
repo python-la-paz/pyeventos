@@ -177,7 +177,6 @@ class HomePage(Page):
         FieldPanel("footer_title"),
         FieldPanel("footer_site_info"),
         FieldPanel("footer_networks"),
-        NativeColorPanel("color_gradient_1"),
         NativeColorPanel("footer_background"),
         NativeColorPanel("footer_color_text"),
         FieldPanel("externalRaws"),
