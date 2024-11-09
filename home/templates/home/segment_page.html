@@ -164,6 +164,11 @@
     {% include 'segments/schedule.html' with block=page   %}
 </div>
 {% endif %}
+{% if segment.block_type == 'iframe_segment' %}
+<div >
+    {% include 'segments/iframe.html' with block=page  %}
+</div>
+{% endif %}
 {% endfor %}
 {% endblock %}
 {% block extra_js %}

@@ -1,0 +1,10 @@
+{% load wagtailcore_tags %}
+<section id="{{block.slug}}" class="google-map-area"  style="background: {{block.background_section}}; color: {{block.color_text_section}}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                {{segment.value.rawHTML}}
+            </div>
+        </div>
+    </div>
+</section>
