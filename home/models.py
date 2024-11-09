@@ -392,7 +392,10 @@ class SegmentPage(Page):
                     [
                         (
                             "rawHTML",
-                            blocks.RawHTMLBlock(required=False),
+                            blocks.RawHTMLBlock(
+                                required=False,
+                                help_text='&lt;div style="overflow-x:auto; max-height: 30vh;" &gt;&lt;content&gt; ... &lt;/content&gt; &lt;/div&gt;',
+                            ),
                         ),
                     ]
                 ),
