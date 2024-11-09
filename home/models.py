@@ -386,6 +386,17 @@ class SegmentPage(Page):
                     ]
                 ),
             ),
+            (
+                "iframe_segment",
+                blocks.StructBlock(
+                    [
+                        (
+                            "rawHTML",
+                            blocks.RawHTMLBlock(required=False),
+                        ),
+                    ]
+                ),
+            ),
         ],
         blank=True,
         use_json_field=True,
