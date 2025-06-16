@@ -56,6 +56,11 @@ docker-compose -f .\docker-compose.prod.traefik.arm64.yaml -d --build
 docker-compose -f .\docker-compose.prod.traefik.arm64.yaml exec -it app python manage.py createsuperuser
 ```
 
+## Contributors
+
+<a href="https://github.com/python-la-paz/pyeventos/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=python-la-paz/pyeventos" />
+</a>
   
 ### Con mucho ❤️ Python La Paz 🐍 
 [![Pagina Web](https://img.shields.io/badge/Web-Python%20La%20Paz-blue.svg)](https://pylapaz.org/)
