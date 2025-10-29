@@ -98,7 +98,7 @@
 {% endif %}
 {% if segment.value.position == "full" %}
 {% image segment.value.image fill-1920x1080-c10 format-webp preserve-svg as tmp_logo_segment %}
-<section id="{{block.slug}}">
+<section id="{{block.slug}}" style="background: {{block.background_section}}; color: {{block.color_text_section}}">
     <div class="hero-area-section hero-area-bg" style='background: url("{{ tmp_logo_segment.url }}") no-repeat; background-size: cover; 
         background-position-y: top;
         background-position-x: center;'>
