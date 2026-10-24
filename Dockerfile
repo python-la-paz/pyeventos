@@ -18,8 +18,6 @@ ENV PYTHONUNBUFFERED=1 \
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
     build-essential \
     libpq-dev \
-    libmariadb-dev-compat \  
-    libmariadb-dev \
     gnutls-bin \
     pkg-config \
     libjpeg62-turbo-dev \

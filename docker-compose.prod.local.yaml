@@ -1,7 +1,6 @@
 version: '3.9' 
 volumes:
   app_media: {}
-  db_data: {}
 services:
   web:
     image: nginx:alpine
@@ -23,14 +22,3 @@ services:
       - app_media:/app/media
     env_file:
       - backend/.env
-    depends_on:
-      - database
-  database:
-    image: mysql:8.0
-    restart: always
-    env_file:
-      - database/.env
-    expose:
-      - "3306"
-    volumes:
-      - db_data:/var/lib/mysql

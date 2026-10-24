@@ -94,15 +94,20 @@ WSGI_APPLICATION = "website.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if APP_DB_TYPE == "mysql":
+if APP_DB_TYPE == "postgresql":
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.mysql",
+            "ENGINE": "django.db.backends.postgresql",
             "HOST": APP_HOST_DB,
             "PORT": APP_PORT_DB,
             "NAME": APP_NAME_DB,
             "USER": APP_USER_DB,
             "PASSWORD": APP_PASSWORD_DB,
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+            'DISABLE_SERVER_SIDE_CURSORS': True,
+            'CONN_HEALTH_CHECKS': True,
         },
     }
 
