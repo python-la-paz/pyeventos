@@ -20,6 +20,14 @@ Apoyado por la comunidad, desarrollado por la comunidad, para la comunidad.
   - Añade los precios de tu evento como un tier list.
   - Añade un espacio para Sponsors y Colaboradores.
 
+## Requisitos
+
+Para ejecutar la aplicación correctamente se necesitan los siguientes requisitos
+
+- Una base de datos Postgresql mas sus variables y cadena de conexión.
+- Configurar almecenamiento remoto para los archivos (compatible con s3), crear
+  el bucket y configurar las variables
+
 ## Clona el repositorio 📦
 
 Puedes acceder al proyecto clonando el repositorio y ejecutando el siguiente comando.
@@ -35,14 +43,12 @@ Solo necesitas tener instalado Docker y Docker Compose en tu máquina, y ejecuta
 # Deploy compose on local build images
 ```sh
 cp backend.env backend/.env
-cp database.env database/.env
 docker-compose -f .\docker-compose.dev.yaml up -d --build
 docker-compose -f .\docker-compose.dev.yaml exec -it app python manage.py createsuperuser
 ```
 # Deploy compose on local prod using image in Docker Hub
 ```sh
 cp backend.env backend/.env
-cp database.env database/.env
 docker-compose -f .\docker-compose.prod.local.yaml up -d --build
 docker-compose -f .\docker-compose.prod.local.yaml exec -it app python manage.py createsuperuser
 ```
@@ -50,7 +56,6 @@ docker-compose -f .\docker-compose.prod.local.yaml exec -it app python manage.py
 # Deploy with traefik using image in Docker Hub
 ```sh
 cp backend.env backend/.env
-cp database.env database/.env
 cp traefik.env .env
 docker-compose -f .\docker-compose.prod.traefik.arm64.yaml -d --build
 docker-compose -f .\docker-compose.prod.traefik.arm64.yaml exec -it app python manage.py createsuperuser

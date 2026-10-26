@@ -94,15 +94,20 @@ WSGI_APPLICATION = "website.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if APP_DB_TYPE == "mysql":
+if APP_DB_TYPE == "postgresql":
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.mysql",
+            "ENGINE": "django.db.backends.postgresql",
             "HOST": APP_HOST_DB,
             "PORT": APP_PORT_DB,
             "NAME": APP_NAME_DB,
             "USER": APP_USER_DB,
             "PASSWORD": APP_PASSWORD_DB,
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+            'DISABLE_SERVER_SIDE_CURSORS': True,
+            'CONN_HEALTH_CHECKS': True,
         },
     }
 
@@ -163,7 +168,23 @@ STATICFILES_DIRS = [
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/4.1/ref/contrib/staticfiles/#manifeststaticfilesstorage
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "access_key": os.getenv("R2_ACCESS_KEY_ID"),
+            "secret_key": os.getenv("R2_SECRET_ACCESS_KEY"),
+            "bucket_name": os.getenv("R2_STORAGE_BUCKET_NAME"),
+            "endpoint_url": os.getenv("R2_ENDPOINT_URL"),
+            "file_overwrite": True,
+            "region_name": "auto",
+        }
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
@@ -188,3 +209,4 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
+WAGTAILDOCS_SERVE_METHOD = 'redirect'

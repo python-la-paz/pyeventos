@@ -1,0 +1,42 @@
+name: Prod CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+
+  lint:
+    uses: ./.github/workflows/z-lint.yaml
+
+  build:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/prod-1-ci.yaml
+    needs: lint
+    with:
+      environment: prod
+      image_repository: ${{ vars.DOCKER_IMAGE }}
+      push_image: ${{ github.event_name == 'push' }}
+    secrets:
+      docker_hub_username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/prod-2-cd.yaml
+    needs: build
+    with:
+      environment: prod
+      image_repository: ${{ vars.DOCKER_IMAGE }}
+      image_tag: ${{ needs.build.outputs.image_tag }}
+      deployment_repository: ${{ vars.ARGOCD_REPOSITORY }}
+      deployment_ref: ${{ vars.ARGOCD_REF || 'main' }}
+      image_repository_path: ${{ vars.ARGOCD_IMAGE_REPOSITORY_PATH || '.pyeventos.image.repository' }}
+      image_tag_path: ${{ vars.ARGOCD_IMAGE_TAG_PATH || '.pyeventos.image.tag' }}
+      argocd_values_file: ${{ vars.ARGOCD_VALUES_FILE }}
+    secrets:
+      token: ${{ secrets.ARGOCD_GH_TOKEN }}
