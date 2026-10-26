@@ -37,7 +37,7 @@
 
 <style>
     .hero-area-bg-image {
-        background: url("{{ tmp_hero.url }}") no-repeat;
+        background: url("{{ tmp_hero.url|safe }}") no-repeat;
         background-size: cover;
         background-position-y: top;
         background-position-x: center;

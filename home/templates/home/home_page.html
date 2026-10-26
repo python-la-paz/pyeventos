@@ -15,7 +15,7 @@
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 {% if page.logo_image %}
     {% image page.logo_image original as tmp_og_image %}
-    <meta property="og:image" itemprop="image" content="{{ request.build_absolute_uri|slice:':-1' }}{{ tmp_og_image.url }}">
+    <meta property="og:image" itemprop="image" content="{{ tmp_og_image.url }}">
 {% endif %}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -28,7 +28,7 @@
 <meta name="twitter:url" content="{{ request.build_absolute_uri }}">
 {% if page.logo_image %}
     {% image page.logo_image original as tmp_twitter_image %}
-    <meta name="twitter:image" content="{{ request.build_absolute_uri|slice:':-1' }}{{ tmp_twitter_image.url }}">
+    <meta name="twitter:image" content="{{ tmp_twitter_image.url }}">
 {% endif %}
 {% endblock %}
 
@@ -70,7 +70,7 @@
 
 <style>
     .hero-area-bg-image {
-        background: url("{{ tmp_hero.url }}") no-repeat;
+        background: url("{{ tmp_hero.url|safe }}") no-repeat;
         background-size: cover;
         background-position-y: top;
         background-position-x: center;

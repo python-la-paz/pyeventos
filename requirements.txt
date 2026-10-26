@@ -4,3 +4,5 @@ django-mathfilters==1.0.0
 whitenoise==6.2.0
 wagtail-color-panel==1.5.0
 psycopg[binary]==3.3.6
+boto3==1.43.118
+django-storages==1.14.6
