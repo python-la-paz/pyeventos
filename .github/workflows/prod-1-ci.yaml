@@ -1,0 +1,74 @@
+name: Prod CI - Build and Push Image
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: GitHub Environment used for this build
+        required: true
+        type: string
+      image_repository:
+        description: Docker Hub image repository
+        required: true
+        type: string
+      push_image:
+        description: Whether to push the image to Docker Hub
+        required: false
+        default: false
+        type: boolean
+    secrets:
+      docker_hub_username:
+        required: false
+      docker_hub_access_token:
+        required: false
+    outputs:
+      image_tag:
+        description: Tag of the built production image
+        value: ${{ jobs.build.outputs.image_tag }}
+
+jobs:
+  build:
+    name: Build production image
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    outputs:
+      image_tag: ${{ steps.image.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate image repository
+        env:
+          IMAGE_REPOSITORY: ${{ inputs.image_repository }}
+        run: test -n "$IMAGE_REPOSITORY"
+
+      - name: Set image tag
+        id: image
+        run: echo "tag=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        if: inputs.push_image
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.docker_hub_username }}
+          password: ${{ secrets.docker_hub_access_token }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: ${{ inputs.push_image }}
+          tags: |
+            ${{ inputs.image_repository }}:${{ steps.image.outputs.tag }}
+            ${{ inputs.image_repository }}:latest
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
+          cache-from: type=gha,scope=prod
+          cache-to: type=gha,mode=max,scope=prod

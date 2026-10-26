@@ -1,0 +1,26 @@
+name: Lint Python Code
+
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff Linter
+        run: ruff check . --exit-zero --output-format=github
+
+      - name: Run Ruff (blocking rules)
+        run: ruff check . --select=I,F401,F541,E713,E714,E721,E,F,COM812,TD,B006,PLC,ERA,INT,LOG,PT,ISC,G,EXE,TC,PIE,T,SIM --exit-zero
+

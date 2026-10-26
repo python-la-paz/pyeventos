@@ -1,0 +1,73 @@
+name: Dev CD - Update Image on Deployment Repository
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: GitHub Environment used for this deployment
+        required: true
+        type: string
+      image_repository:
+        required: true
+        type: string
+      image_tag:
+        required: true
+        type: string
+      deployment_repository:
+        required: true
+        type: string
+      deployment_ref:
+        required: false
+        default: main
+        type: string
+      image_repository_path:
+        required: false
+        default: .image.repository
+        type: string
+      image_tag_path:
+        required: false
+        default: .image.tag
+        type: string
+      argocd_values_file:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  update-image:
+    name: Update dev image in GitOps repository
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout deployment repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ inputs.deployment_repository }}
+          ref: ${{ inputs.deployment_ref }}
+          token: ${{ secrets.token }}
+          path: deployment-config
+
+      - name: Set up yq
+        uses: shiipou/setup-yq-action@v2.2.0
+
+      - name: Update image repository and tag
+        env:
+          VALUES_FILE: ${{ vars.argocd_values_file }}
+          IMAGE_REPOSITORY: ${{ inputs.image_repository }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+          IMAGE_REPOSITORY_PATH: ${{ inputs.image_repository_path }}
+          IMAGE_TAG_PATH: ${{ inputs.image_tag_path }}
+        run: |
+          yq -i 'eval(strenv(IMAGE_REPOSITORY_PATH)) = strenv(IMAGE_REPOSITORY) | eval(strenv(IMAGE_TAG_PATH)) = strenv(IMAGE_TAG)' "deployment-config/$VALUES_FILE"
+
+          git -C deployment-config config user.email "github-actions[bot]@users.noreply.github.com"
+          git -C deployment-config config user.name "github-actions[bot]"
+          git -C deployment-config add "$VALUES_FILE"
+          if git -C deployment-config diff --cached --quiet; then
+            echo "Image values are already up to date."
+          else
+            git -C deployment-config commit -m "Deploy dev image $IMAGE_TAG"
+            git -C deployment-config push
+          fi
